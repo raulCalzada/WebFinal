@@ -1,15 +1,18 @@
 
-.header {
-  background-image: url("../../public/fachadaUAH.jpg");
+body {
+  background-image: url("../Public/fondo.jpg");
+  background-repeat : no-repeat;
+  background-size: cover;
   object-fit: fixed;
   display: flex; /* Muestra los elementos como elementos flex */
   flex-direction: column; /* Muestra los elementos en una columna */
   gap: 0; /* Elimina el espacio entre los elementos */
   align-items: center;
   justify-content: center;
+  
 }
 
-.cuadrado{
+cuadrado{
   position: relative; 
   width: 800px; 
   height: 700px; 
@@ -17,32 +20,50 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-top: 100px solid #173f63;
-  background: #378eda;
+  border-top: 100px solid #DB9D47;
+  background: #FFE19C;
 }
 
-.cuadrado::before {
-  content: "Access to internship aplication"; /* Añade el texto al borde superior */
+cuadrado::before {
+  content: "INGENIEROS DE PESO"; /* Añade el texto al borde superior */
   position: absolute; /* Establece la posición del texto como absoluta */
   top: -70px; /* Sitúa el texto 20px por encima del borde superior */
   left: 0; /* Alinea el texto con el borde izquierdo del cuadrado */
   right: 0; /* Alinea el texto con el borde derecho del cuadrado */
   text-align: center; /* Centra el texto */
-  font-size: calc(10px + 2vmin);/* Establece el tamaño de fuente en 12px */
-  color: white; /* Colorea el texto de gris oscuro */
+  font-size: calc(20px + 2vmin);/* Establece el tamaño de fuente en 12px */
+  color: #EDFFD9; /* Colorea el texto de gris oscuro */
 }
+
+
+/*Contiene la imagen*/
+container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 input {
   display: block;
   width: 400px;
+  height: 50px;
   padding: 0 20px;
 }
 
-input,
-input::placeholder {
+.input,
+.input::placeholder {
   font: 20px/3 sans-serif;
 }
-output::placeholder {
+.output::placeholder {
   color: rgb(59, 7, 248);
   font-size: 2em;
   font-family: 'Roboto', sans-serif;
@@ -52,34 +73,23 @@ output::placeholder {
 }
 
 
-.container {
-  width: 200px;
-  height: 200px;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
-.text-white {
-  color: white;
+
+
+text-white {
+  color: #EDFFD9;
   font-size: calc(10px + 2vmin);
 }
-.space1{
+space1{
   height: 900px;
   width: 100px;
 }
-.escritura{
-  color: black;
+escritura{
+  color: #EDFFD9;
   font-size: 2em;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300px;
+  font-weight: 30px;
   text-align: center;
   align-items: center;
 }
@@ -89,8 +99,8 @@ output::placeholder {
 .btn {
   width: 250px; /* Establece el ancho del botón en 200px */
   height: 50px; /* Establece la altura del botón en 50px */
-  background-color: #007bff; /* Colorea el fondo del botón de azul oscuro */
-  color: white; /* Colorea el texto del botón de blanco */
+  background-color: #3A3042; /* Colorea el fondo del botón de azul oscuro */
+  color: #EDFFD9; /* Colorea el texto del botón de blanco */
   border: none; /* Elimina el borde del botón */
   border-radius: 10px; /* Redondea los bordes del botón */
   font-size: 16px; /* Establece el tamaño de fuente en 16px */
@@ -98,11 +108,11 @@ output::placeholder {
 }
 
 .btn:hover {
-  background-color: #0069d9; /* Colorea el fondo del botón de azul claro cuando está desactivado */
+  background-color: #FFE19C; /* Colorea el fondo del botón cuando está desactivado */
 }
 
 .btn:active {
-  background-color: #0062cc; /* Colorea el fondo del botón de azul oscuro cuando está activado */
+  background-color: #FF784F; /* Colorea el fondo del botón  cuando está activado */
 }
 
 
