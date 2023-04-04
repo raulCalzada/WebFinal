@@ -1,6 +1,8 @@
 
-header {
-  background-image: url("../Public/fachadaUAH.jpg");
+body {
+  background-image: url("../Public/fondo.jpg");
+  background-repeat : no-repeat;
+  background-size: cover;
   object-fit: fixed;
   display: flex; /* Muestra los elementos como elementos flex */
   flex-direction: column; /* Muestra los elementos en una columna */
@@ -8,10 +10,6 @@ header {
   align-items: center;
   justify-content: center;
   
-}
-h1{
-  background: green;
-  color: white;
 }
 
 cuadrado{
@@ -22,8 +20,8 @@ cuadrado{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-top: 100px solid #173f63;
-  background: #378eda;
+  border-top: 100px solid #DB9D47;
+  background: #FFE19C;
 }
 
 cuadrado::before {
@@ -34,7 +32,7 @@ cuadrado::before {
   right: 0; /* Alinea el texto con el borde derecho del cuadrado */
   text-align: center; /* Centra el texto */
   font-size: calc(20px + 2vmin);/* Establece el tamaño de fuente en 12px */
-  color: white; /* Colorea el texto de gris oscuro */
+  color: #EDFFD9; /* Colorea el texto de gris oscuro */
 }
 
 
@@ -80,7 +78,7 @@ input {
 
 
 text-white {
-  color: white;
+  color: #EDFFD9;
   font-size: calc(10px + 2vmin);
 }
 space1{
@@ -88,7 +86,7 @@ space1{
   width: 100px;
 }
 escritura{
-  color: rgb(255, 255, 255);
+  color: #EDFFD9;
   font-size: 2em;
   font-family: 'Roboto', sans-serif;
   font-weight: 30px;
@@ -101,8 +99,8 @@ escritura{
 .btn {
   width: 250px; /* Establece el ancho del botón en 200px */
   height: 50px; /* Establece la altura del botón en 50px */
-  background-color: #007bff; /* Colorea el fondo del botón de azul oscuro */
-  color: white; /* Colorea el texto del botón de blanco */
+  background-color: #3A3042; /* Colorea el fondo del botón de azul oscuro */
+  color: #EDFFD9; /* Colorea el texto del botón de blanco */
   border: none; /* Elimina el borde del botón */
   border-radius: 10px; /* Redondea los bordes del botón */
   font-size: 16px; /* Establece el tamaño de fuente en 16px */
@@ -110,11 +108,11 @@ escritura{
 }
 
 .btn:hover {
-  background-color: #0069d9; /* Colorea el fondo del botón de azul claro cuando está desactivado */
+  background-color: #FFE19C; /* Colorea el fondo del botón cuando está desactivado */
 }
 
 .btn:active {
-  background-color: #0062cc; /* Colorea el fondo del botón de azul oscuro cuando está activado */
+  background-color: #FF784F; /* Colorea el fondo del botón  cuando está activado */
 }
 
 
