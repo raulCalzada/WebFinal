@@ -1,0 +1,112 @@
+
+.header {
+  background-image: url("../../public/fachadaUAH.jpg");
+  object-fit: fixed;
+  display: flex; /* Muestra los elementos como elementos flex */
+  flex-direction: column; /* Muestra los elementos en una columna */
+  gap: 0; /* Elimina el espacio entre los elementos */
+  align-items: center;
+  justify-content: center;
+}
+
+.cuadrado{
+  position: relative; 
+  width: 800px; 
+  height: 700px; 
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 100px solid #173f63;
+  background: #378eda;
+}
+
+.cuadrado::before {
+  content: "Access to internship aplication"; /* Añade el texto al borde superior */
+  position: absolute; /* Establece la posición del texto como absoluta */
+  top: -70px; /* Sitúa el texto 20px por encima del borde superior */
+  left: 0; /* Alinea el texto con el borde izquierdo del cuadrado */
+  right: 0; /* Alinea el texto con el borde derecho del cuadrado */
+  text-align: center; /* Centra el texto */
+  font-size: calc(10px + 2vmin);/* Establece el tamaño de fuente en 12px */
+  color: white; /* Colorea el texto de gris oscuro */
+}
+
+input {
+  display: block;
+  width: 400px;
+  padding: 0 20px;
+}
+
+input,
+input::placeholder {
+  font: 20px/3 sans-serif;
+}
+output::placeholder {
+  color: rgb(59, 7, 248);
+  font-size: 2em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300px;
+  text-align: center;
+  align-items: center;
+}
+
+
+.container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-white {
+  color: white;
+  font-size: calc(10px + 2vmin);
+}
+.space1{
+  height: 900px;
+  width: 100px;
+}
+.escritura{
+  color: black;
+  font-size: 2em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300px;
+  text-align: center;
+  align-items: center;
+}
+
+
+
+.btn {
+  width: 250px; /* Establece el ancho del botón en 200px */
+  height: 50px; /* Establece la altura del botón en 50px */
+  background-color: #007bff; /* Colorea el fondo del botón de azul oscuro */
+  color: white; /* Colorea el texto del botón de blanco */
+  border: none; /* Elimina el borde del botón */
+  border-radius: 10px; /* Redondea los bordes del botón */
+  font-size: 16px; /* Establece el tamaño de fuente en 16px */
+  cursor: pointer; /* Muestra un cursor de mano cuando pasas el mouse sobre el botón */
+}
+
+.btn:hover {
+  background-color: #0069d9; /* Colorea el fondo del botón de azul claro cuando está desactivado */
+}
+
+.btn:active {
+  background-color: #0062cc; /* Colorea el fondo del botón de azul oscuro cuando está activado */
+}
+
+
+space2{
+  height: 100px;
+  width: 100px;
+}
