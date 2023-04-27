@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Aplication;
+package com.mycompany.ingenieros;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,15 +10,16 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author raulc
  */
-public class Connect {
-    String bd = "";
-    String url="jdbc:mysql://localhost:3306/";
+public class Connect {   
     String user = "root";
-    String password ="";
+    String password ="Jager1234";
+    String bd = "rrhh";
+    String url="jdbc:rrhh://127.0.0.1:3306/"; //?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDateTimeCode=false&serverTimezone=UTC
     String driver= "com.mysql.cj.jdbc.Driver";
     Connection cx;
     
