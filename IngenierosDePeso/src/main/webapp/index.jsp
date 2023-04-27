@@ -10,23 +10,25 @@
     <head>
         <title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/Login.css">
+        <link rel="stylesheet" href="css/Index.css">
         
     </head>
-    <body>
-        <div class="header">
-            <div class="cuadrado">
-                <div class="container"><img class="image" src="Public/logo.jpg"></div>
-                <p></p>
-                <p style="color: #EDFFD9">Correo</p>
-                <input type="USERNAME" placeholder="Email"></input>
-                <p style="color: #edffd8">Contraseña</p>
-                <input type="Password" placeholder="Password"></input>
-                <p></p>
-                <button class="btn">Login</button>
-                </p>
+    <body class="back">
+        <form action="/java/Controller/Controller.java">
+            <div class="header">
+                <div class="cuadrado">
+                    <div class="container"><img class="image" src="Public/logo.jpg"></div>
+                    <p></p>
+                    <p style="color: #EDFFD9">Correo</p>
+                    <input type="USERNAME" placeholder="Email" name="txtUsername"></input>
+                    <p style="color: #edffd8">Contraseña</p>
+                    <input type="Password" placeholder="Password" name="txtPassword"></input>
+                    <p></p>
+                    <button class="btn" name="action" value="Login">Login</button>
+                    <p></p>
+                </div>
             </div>
-        </div>
+        </form>    
     </body>
 </html>
 
