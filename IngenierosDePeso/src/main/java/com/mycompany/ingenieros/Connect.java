@@ -10,6 +10,13 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +26,7 @@ public class Connect {
     String user = "root";
     String password ="Jager1234";
     String bd = "rrhh";
-    String url="jdbc:rrhh://127.0.0.1:3306/"; //?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDateTimeCode=false&serverTimezone=UTC
+    String url="jdbc:mysql://localhost:3306/"; //?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDateTimeCode=false&serverTimezone=UTC
     String driver= "com.mysql.cj.jdbc.Driver";
     Connection cx;
     
@@ -32,6 +39,7 @@ public class Connect {
             Class.forName(driver);
             cx = (Connection) DriverManager.getConnection(url+bd, user, password);
             System.out.print("SE CONECTÓ A LA BD "+bd);
+            
         } catch (ClassNotFoundException ex) {
             System.out.print("NO SE CONECTÓ A LA BD "+bd);
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,10 +57,13 @@ public class Connect {
     
     public static void main (String[] args) throws SQLException{
         Connect connection = new Connect();
-        connection.conect();
+        Connection cx = connection.conect();
+        
+        Statement state = cx.createStatement();
+        ResultSet rs = state.executeQuery("Select * from empresa");
+        while(rs.next()){
+            System.out.println(rs.getString(2));
+        }
+        cx.close();
     }
-    
-    
-    
-    
 }
