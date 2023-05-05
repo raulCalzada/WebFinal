@@ -1,5 +1,5 @@
 
-body {
+.back{
   background-image: url("../Public/fondo.jpg");
   background-repeat : no-repeat;
   background-size: cover;
@@ -12,7 +12,7 @@ body {
   
 }
 
-cuadrado{
+.cuadrado{
   position: relative; 
   width: 800px; 
   height: 700px; 
@@ -24,7 +24,7 @@ cuadrado{
   background: #FFE19C;
 }
 
-cuadrado::before {
+.cuadrado::before {
   content: "INGENIEROS DE PESO"; /* Añade el texto al borde superior */
   position: absolute; /* Establece la posición del texto como absoluta */
   top: -70px; /* Sitúa el texto 20px por encima del borde superior */
@@ -37,7 +37,7 @@ cuadrado::before {
 
 
 /*Contiene la imagen*/
-container {
+.container {
   width: 200px;
   height: 200px;
   border: 1px solid black;
@@ -77,15 +77,15 @@ input {
 
 
 
-text-white {
+.text-white {
   color: #EDFFD9;
   font-size: calc(10px + 2vmin);
 }
-space1{
+.space1{
   height: 900px;
   width: 100px;
 }
-escritura{
+.escritura{
   color: #EDFFD9;
   font-size: 2em;
   font-family: 'Roboto', sans-serif;
@@ -116,7 +116,7 @@ escritura{
 }
 
 
-space2{
+.space2{
   height: 100px;
   width: 100px;
 }
