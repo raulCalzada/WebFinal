@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,29 +24,39 @@ public class Validate {
     int r = 0;
     
     public int Valid(User user){
-        String sql = "Select * from rrhh where username=? and password=?";
+        String sql = "SELECT username,password,tipo_usuario FROM rrhh.usuarios  ";
+        ArrayList<String> usernames = new ArrayList<String>();
+        ArrayList<String> passwords = new ArrayList<String>();
+        ArrayList<String> typeUser = new ArrayList<String>();
         try {
             con = cn.conect();
             ps= con.prepareStatement(sql);
-            ps.setString(2,user.getUsername() );
-            ps.setString(3, user.getPassword());
+            
+            rs = ps.executeQuery();
             while(rs.next()){
-                r += 1;
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
+                usernames.add(rs.getString(1));
+                passwords.add(rs.getString(2));
+                typeUser.add(rs.getString(3));
             }
-            if(r==1){
-                return 1;
-            }
-            else{
-                return 0;
-            }
+            String us;
+            String pw;
+            for(int i = 0; i <= usernames.size()-1; i++){
+                us = user.username;
+                pw =  user.password;
+                
+                if (usernames.get(i).equals(user.username) && passwords.get(i).equals(user.password)){     
+                    if (typeUser.get(i).equals("U")) return 1;
+                    else return 2;
+  
+                }
+            } 
             
             
         } catch (SQLException ex) {
             Logger.getLogger(Validate.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
+        return 0;
         
     }
 }

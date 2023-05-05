@@ -14,17 +14,18 @@
         
     </head>
     <body class="back">
-        <form action="/java/Controller/Controller.java">
+        <form action="UserController">
             <div class="header">
                 <div class="cuadrado">
                     <div class="container"><img class="image" src="Public/logo.jpg"></div>
                     <p></p>
                     <p style="color: #EDFFD9">Correo</p>
-                    <input type="USERNAME" placeholder="Email" name="txtUsername"></input>
+                    <input type="USERNAME" placeholder="Email" name="txtUsername" >
                     <p style="color: #edffd8">Contraseña</p>
-                    <input type="Password" placeholder="Password" name="txtPassword"></input>
+                    <input type="Password" placeholder="Password" name="txtPassword" >
                     <p></p>
                     <button class="btn" name="action" value="Login">Login</button>
+                    <a class="my-button" href="Views/PrincipalRRHH.jsp">My Button</a>
                     <p></p>
                 </div>
             </div>
