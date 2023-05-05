@@ -17,7 +17,6 @@ import java.util.logging.Logger;
  * @author raulc
  */
 public class Validate {
-    Connection con;
     Connect cn = new Connect();
     PreparedStatement ps;
     ResultSet rs; 
@@ -29,7 +28,8 @@ public class Validate {
         ArrayList<String> passwords = new ArrayList<String>();
         ArrayList<String> typeUser = new ArrayList<String>();
         try {
-            con = cn.conect();
+            Connect connection = new Connect();
+            Connection con = connection.conect();
             ps= con.prepareStatement(sql);
             
             rs = ps.executeQuery();

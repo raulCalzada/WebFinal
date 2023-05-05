@@ -10,12 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Proyectos RRHH</title>
-        <link rel="stylesheet" href="../RRHH.css">
+        <link rel="stylesheet" href="../css/RRHH.css">
     </head>
     <body>
         <div class="header">
             <div class="square">
-                
+                 
             </div>
 
         </div>
