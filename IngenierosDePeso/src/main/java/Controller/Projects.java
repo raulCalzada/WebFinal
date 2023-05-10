@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import Model.Project;
+import Utils.CRUDProjects;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +13,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,8 +33,7 @@ public class Projects extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     String listar="/Views/RRHH/Proyectos.jsp";
-    String add= "/Views/add.jsp";
-    String delete = "/Views/delete.jsp";
+    String edit= "/Views/RRHH/ProyectosEdit.jsp";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +58,27 @@ public class Projects extends HttpServlet {
         String action =request.getParameter("action");
         if(action.equalsIgnoreCase("listar")){
             access = listar;
+        }else if(action.equalsIgnoreCase("edit")){
+            request.setAttribute("idproj", request.getParameter("id"));
+            access = edit;
+        }else if (action.equalsIgnoreCase("update")){
+            Project p = new Project();
+            CRUDProjects cpr = new CRUDProjects();
+            
+            String id = request.getParameter("txtId");
+            String name = request.getParameter("txtNameProyect");
+            String empresaId = request.getParameter("txtEmpresaProyect");
+            
+            p.setId_empresa(empresaId);
+            p.setId_proyecto(id);
+            p.setNombre(name);
+            
+            
+            cpr.edit(p);
+                
+            access = listar;
         }
+        //en base a cada else if voy a un lugar o a otro
         RequestDispatcher view = request.getRequestDispatcher(access);
         view.forward(request, response);
     }

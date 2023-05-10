@@ -54,12 +54,44 @@ public class CRUDProjects{
         }
         return list;
     }
-
+    public Project list(String id) throws SQLException{
+        
+        ArrayList<Empresa> listEmpresa = new ArrayList<>();
+        String sql = "SELECT * FROM rrhh.proyectos where id_proyecto="+id;
+        String sql_empresa = "SELECT * FROM rrhh.empresa";
+        
+        
+        
+        con = cn.conect();
+        ps= con.prepareStatement(sql);
+        
+        rs = ps.executeQuery(sql);
+        
+        
+        
+        while (rs.next()){  
+            p.setId_proyecto(rs.getString(1));
+            p.setNombre(rs.getString(2));
+            p.setId_empresa(rs.getString(3));
+        }
+        return p;
+    }
     public boolean add(Project p){
         throw new UnsupportedOperationException("");
     }
     public boolean edit(Project p){
-        throw new UnsupportedOperationException("");
+        try{
+            String sql = "update rrhh.proyectos set nombre='" +p.getNombre()+"', id_empresa='"+p.getId_empresa() +"' where id_proyecto='"+p.getId_proyecto()+"'";
+            con = cn.conect();
+            ps= con.prepareStatement(sql);
+            ps.executeUpdate(); 
+            return true;
+        }catch (Exception e){
+        }
+        
+        
+        return false;
+        
     }
     public boolean eliminar(int id){
         throw new UnsupportedOperationException("");

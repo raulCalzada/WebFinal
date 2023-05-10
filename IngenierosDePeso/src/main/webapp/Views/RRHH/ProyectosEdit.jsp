@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@page import="Utils.CRUDProjects" %>
+<%@page import="Model.Project" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +16,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%  CRUDProjects crudProjects = new CRUDProjects();
+            String id = (String) request.getAttribute("idproj");
+            Project project = (Project)crudProjects.list(id);
+        %>
+        <h1>Modificar proyecto</h1>
+        <form action="Projects">
+            Nombre:<br><!-- comment -->
+            <input type="text" name="txtNameProyect" value="<%= project.getNombre() %>"> 
+            Empresa:<br><!-- comment -->
+            <input type="text" name="txtEmpresaProyect" value="<%= project.getId_empresa() %>"> 
+            <input type="hidden" name="txtId" value="<%= project.getId_proyecto() %>"> 
+            <button type="submit" name="action" value="update"> </button>>
+            <a href="Project?action=listar">Volver</a>
+        </form> 
     </body>
 </html>

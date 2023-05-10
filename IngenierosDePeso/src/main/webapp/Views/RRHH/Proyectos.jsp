@@ -42,7 +42,7 @@
                             <td><%= project.getNombre() %></td>
                             <td><%= project.getId_empresa() %></td>
                             <!-- Para editar tomamos el valor ID_proyecto que se lo vamos a pasar al controlador -->
-                            <td><a href="Projects?accion=edit&id=<%= project.getId_proyecto()%>"> Editar </a></td>
+                            <td><a href="Projects?action=edit&id=<%= project.getId_proyecto()%>"> Editar </a></td>
                         </tr>
                         <% } %>
                     </tbody>
