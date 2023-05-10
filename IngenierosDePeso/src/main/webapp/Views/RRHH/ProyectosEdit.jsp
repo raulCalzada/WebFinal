@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Empresas
-    Created on : 5 may 2023, 15:07:20
+    Document   : ProyectosEdit
+    Created on : 10 may 2023, 12:45:16
     Author     : raulc
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <title>JSP Page</title>
     </head>
     <body>
         <h1>Hello World!</h1>

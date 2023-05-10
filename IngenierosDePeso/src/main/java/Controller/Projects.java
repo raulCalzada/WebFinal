@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author raulc
  */
-public class ProyectosRRHH extends HttpServlet {
+public class Projects extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,12 +27,15 @@ public class ProyectosRRHH extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    String listar="/Views/RRHH/Proyectos.jsp";
+    String add= "/Views/add.jsp";
+    String delete = "/Views/delete.jsp";
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-        }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,8 +50,15 @@ public class ProyectosRRHH extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String access = "";
+        String action =request.getParameter("action");
+        if(action.equalsIgnoreCase("listar")){
+            access = listar;
+        }
+        RequestDispatcher view = request.getRequestDispatcher(access);
+        view.forward(request, response);
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

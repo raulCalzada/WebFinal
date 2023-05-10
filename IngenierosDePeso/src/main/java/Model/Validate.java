@@ -40,6 +40,7 @@ public class Validate {
             }
             String us;
             String pw;
+            con.close();
             for(int i = 0; i <= usernames.size()-1; i++){
                 us = user.username;
                 pw =  user.password;

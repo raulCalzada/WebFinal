@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ProyectosRRHH</servlet-name>
-        <servlet-class>Controller.ProyectosRRHH</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UserController</servlet-name>
         <servlet-class>Controller.UserController</servlet-class>
     </servlet>
-  
-    <servlet-mapping>
-        <servlet-name>ProyectosRRHH</servlet-name>
-        <url-pattern>/ProyectosRRHH</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>Projects</servlet-name>
+        <servlet-class>Controller.Projects</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Empresas</servlet-name>
+        <servlet-class>Controller.Empresas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Projects</servlet-name>
+        <url-pattern>/Projects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Empresas</servlet-name>
+        <url-pattern>/Empresas</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

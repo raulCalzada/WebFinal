@@ -6,7 +6,6 @@ package Controller;
 
 import Model.User;
 import Model.Validate;
-import com.mysql.cj.log.Log;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
