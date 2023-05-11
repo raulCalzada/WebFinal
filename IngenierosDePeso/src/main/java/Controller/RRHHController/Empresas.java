@@ -2,26 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.RRHHController;
 
-import Model.Project;
-import Utils.CRUDProjects;
+import Model.Empresa;
+import Utils.CRUDEmpresas;
 import jakarta.servlet.RequestDispatcher;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
  * @author raulc
  */
-public class Projects extends HttpServlet {
+public class Empresas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,8 +29,8 @@ public class Projects extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String listar="/Views/RRHH/Proyectos.jsp";
-    String edit= "/Views/RRHH/ProyectosEdit.jsp";
+    String listar="/Views/RRHH/Empresas.jsp";
+    String edit= "/Views/RRHH/EmpresasEdit.jsp";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -50,30 +47,26 @@ public class Projects extends HttpServlet {
         if(action.equalsIgnoreCase("listar")){
             access = listar;
         }else if(action.equalsIgnoreCase("edit")){
-            request.setAttribute("idproj", request.getParameter("id"));
+            request.setAttribute("idempres", request.getParameter("id"));
             access = edit;
         }else if (action.equalsIgnoreCase("update")){
-            Project p = new Project();
-            CRUDProjects cpr = new CRUDProjects();
+            Empresa e = new Empresa();
+            CRUDEmpresas ce = new CRUDEmpresas();
             
             String id = request.getParameter("txtId");
-            String name = request.getParameter("txtNameProyect");
-            String empresaId = request.getParameter("txtEmpresaProyect");
+            String name = request.getParameter("txtNameEmpres");
             
-            p.setId_empresa(empresaId);
-            p.setId_proyecto(id);
-            p.setNombre(name);
+            e.setId_empresa(id);
+            e.setNombre_empresa(name);
             
+            ce.edit(e);
             
-            cpr.edit(p);
-                
             access = listar;
         }
-        //en base a cada else if voy a un lugar o a otro
+       //en base a cada else if voy a un lugar o a otro
         RequestDispatcher view = request.getRequestDispatcher(access);
-        view.forward(request, response);
+        view.forward(request, response); 
     }
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.

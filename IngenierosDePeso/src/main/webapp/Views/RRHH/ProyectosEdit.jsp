@@ -28,7 +28,7 @@
             <input type="text" name="txtEmpresaProyect" value="<%= project.getId_empresa() %>"> 
             <input type="hidden" name="txtId" value="<%= project.getId_proyecto() %>"> 
             <button type="submit" name="action" value="update"> </button>>
-            <a href="Project?action=listar">Volver</a>
+            <a href="Projects?action=listar">Volver</a>
         </form> 
     </body>
 </html>

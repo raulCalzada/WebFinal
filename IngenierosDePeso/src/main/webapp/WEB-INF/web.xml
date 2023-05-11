@@ -6,15 +6,19 @@
     </servlet>
     <servlet>
         <servlet-name>Projects</servlet-name>
-        <servlet-class>Controller.Projects</servlet-class>
+        <servlet-class>Controller.RRHHController.Projects</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Empresas</servlet-name>
-        <servlet-class>Controller.Empresas</servlet-class>
+        <servlet-class>Controller.RRHHController.Empresas</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Marcajes</servlet-name>
-        <servlet-class>Controller.Marcajes</servlet-class>
+        <servlet-class>Controller.RRHHController.Marcajes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Users</servlet-name>
+        <servlet-class>Controller.RRHHController.Users</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Marcajes</servlet-name>
         <url-pattern>/Marcajes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/Users</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

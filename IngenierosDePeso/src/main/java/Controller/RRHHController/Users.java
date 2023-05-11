@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.RRHHController;
 
-import Model.Empresa;
-import Utils.CRUDEmpresas;
+import Model.Project;
+import Utils.CRUDProjects;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +18,7 @@ import java.io.PrintWriter;
  *
  * @author raulc
  */
-public class Empresas extends HttpServlet {
+public class Users extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,16 +29,23 @@ public class Empresas extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String listar="/Views/RRHH/Empresas.jsp";
-    String edit= "/Views/RRHH/EmpresasEdit.jsp";
-    
+        String listar="/Views/RRHH/Proyectos.jsp";
+    String edit= "/Views/RRHH/ProyectosEdit.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,25 +54,28 @@ public class Empresas extends HttpServlet {
         if(action.equalsIgnoreCase("listar")){
             access = listar;
         }else if(action.equalsIgnoreCase("edit")){
-            request.setAttribute("idempres", request.getParameter("id"));
+            request.setAttribute("idUser", request.getParameter("id"));
             access = edit;
         }else if (action.equalsIgnoreCase("update")){
-            Empresa e = new Empresa();
-            CRUDEmpresas ce = new CRUDEmpresas();
+            Project p = new Project();
+            CRUDProjects cpr = new CRUDProjects();
             
             String id = request.getParameter("txtId");
-            String name = request.getParameter("txtNameEmpres");
+            String name = request.getParameter("txtNameProyect");
+            String empresaId = request.getParameter("txtEmpresaProyect");
             
-            e.setId_empresa(id);
-            e.setNombre_empresa(name);
+            p.setId_empresa(empresaId);
+            p.setId_proyecto(id);
+            p.setNombre(name);
             
-            ce.edit(e);
             
+            cpr.edit(p);
+                
             access = listar;
         }
-       //en base a cada else if voy a un lugar o a otro
+        //en base a cada else if voy a un lugar o a otro
         RequestDispatcher view = request.getRequestDispatcher(access);
-        view.forward(request, response); 
+        view.forward(request, response);
     }
 
     /**

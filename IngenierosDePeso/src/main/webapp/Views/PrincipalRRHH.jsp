@@ -23,7 +23,7 @@
                 <br>
                 <button class="button-3">Marcajes</button>
                 <br>
-                <button class="button-4">Trabajadores</button>
+                <a href="Users?action=listar"><button class="button-4">Trabajadores</button></a>
                 <br>
             </div>
         </div>   

@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@page import="Utils.CRUDEmpresas" %>
+<%@page import="Model.Empresa" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +16,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%  CRUDEmpresas crudEmpresas = new CRUDEmpresas();
+            String id = (String) request.getAttribute("idempres");
+            Empresa e = (Empresa)crudEmpresas.list(id);
+        %>
+        <h1>Modificar proyecto</h1>
+        <form action="Empresas">
+            Nombre de la Empresa:<br><!-- comment -->
+            <input type="text" name="txtNameEmpres" value="<%= e.getNombre_empresa() %>">  
+            <input type="hidden" name="txtId" value="<%= e.getId_empresa() %>"> 
+            <button type="submit" name="action" value="update"> </button>>
+            <a href="Empresas?action=listar">Volver</a>
+        </form> 
     </body>
 </html>
+
