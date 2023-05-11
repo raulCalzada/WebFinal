@@ -15,6 +15,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -79,7 +82,11 @@ public class Users extends HttpServlet {
             u.setDni(dni);
             
             
-            cu.edit(u);
+            try {
+                cu.edit(u);
+            } catch (SQLException ex) {
+                Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 
             access = listar;
         }else if (action.equalsIgnoreCase("mark")){

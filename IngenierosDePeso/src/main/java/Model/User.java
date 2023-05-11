@@ -9,15 +9,44 @@ package Model;
  * @author raulc
  */
 public class User {
+    String tipo;
     String id;
     String username;
     String password;
     String dni;
     String nombre, apellidos;
     String fecha_alta, fecha_baja;
+    Project proyecto;
+    Empresa empresa;
 
     public User() {
-        
+       
+    }
+    
+    //solo para Usuarios tipo U
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+//para todos los usuarios
+
+    public Project getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Project proyecto) {
+        this.proyecto = proyecto;
     }
         
     
@@ -85,6 +114,8 @@ public class User {
     public void setFecha_baja(String fecha_baja) {
         this.fecha_baja = fecha_baja;
     }
+
+   
     
   
     
