@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Model;
+package Utils;
 
+import Model.Connect;
+import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,10 +44,10 @@ public class Validate {
             String pw;
             con.close();
             for(int i = 0; i <= usernames.size()-1; i++){
-                us = user.username;
-                pw =  user.password;
+                us = user.getUsername();
+                pw =  user.getPassword();
                 
-                if (usernames.get(i).equals(user.username) && passwords.get(i).equals(user.password)){     
+                if (usernames.get(i).equals(user.getUsername()) && passwords.get(i).equals(user.getPassword())){     
                     if (typeUser.get(i).equals("U")) return 1;
                     else return 2;
   

@@ -19,7 +19,7 @@
             <div class="square">
                 <a href="Projects?action=listar"><button class="button-1" >Proyectos</button></a>
                 <br>
-                <button class="button-2">Empresas</button>
+                <a href="Empresas?action=listar"><button class="button-2">Empresas</button></a>
                 <br>
                 <button class="button-3">Marcajes</button>
                 <br>

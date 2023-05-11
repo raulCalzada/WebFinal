@@ -4,9 +4,6 @@
  */
 package Controller;
 
-import Model.Empresa;
-import Utils.CRUDEmpresas;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +15,7 @@ import java.io.PrintWriter;
  *
  * @author raulc
  */
-public class Empresas extends HttpServlet {
+public class Marcajes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,43 +26,36 @@ public class Empresas extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String listar="/Views/RRHH/Empresas.jsp";
-    String edit= "/Views/RRHH/EmpresasEdit.jsp";
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Marcajes</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Marcajes at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String access = "";
-        String action =request.getParameter("action");
-        if(action.equalsIgnoreCase("listar")){
-            access = listar;
-        }else if(action.equalsIgnoreCase("edit")){
-            request.setAttribute("idempres", request.getParameter("id"));
-            access = edit;
-        }else if (action.equalsIgnoreCase("update")){
-            Empresa e = new Empresa();
-            CRUDEmpresas ce = new CRUDEmpresas();
-            
-            String id = request.getParameter("txtId");
-            String name = request.getParameter("txtNameEmpres");
-            
-            e.setId_empresa(id);
-            e.setNombre_empresa(name);
-            
-            ce.edit(e);
-            
-            access = listar;
-        }
-       //en base a cada else if voy a un lugar o a otro
-        RequestDispatcher view = request.getRequestDispatcher(access);
-        view.forward(request, response); 
+        processRequest(request, response);
     }
 
     /**

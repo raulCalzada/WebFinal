@@ -12,6 +12,10 @@
         <servlet-name>Empresas</servlet-name>
         <servlet-class>Controller.Empresas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Marcajes</servlet-name>
+        <servlet-class>Controller.Marcajes</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -24,7 +28,10 @@
         <servlet-name>Empresas</servlet-name>
         <url-pattern>/Empresas</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>Marcajes</servlet-name>
+        <url-pattern>/Marcajes</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

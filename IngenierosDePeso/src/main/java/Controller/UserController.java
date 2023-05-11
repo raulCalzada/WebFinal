@@ -5,7 +5,7 @@
 package Controller;
 
 import Model.User;
-import Model.Validate;
+import Utils.Validate;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
