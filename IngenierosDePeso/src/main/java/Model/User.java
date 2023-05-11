@@ -9,7 +9,7 @@ package Model;
  * @author raulc
  */
 public class User {
-    int id;
+    String id;
     String username;
     String password;
     String dni;
@@ -22,11 +22,11 @@ public class User {
         
     
     //getters and setters
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -4,8 +4,10 @@
  */
 package Controller.RRHHController;
 
-import Model.Project;
+
+import Model.User;
 import Utils.CRUDProjects;
+import Utils.CRUDUsers;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -29,8 +31,9 @@ public class Users extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        String listar="/Views/RRHH/Proyectos.jsp";
-    String edit= "/Views/RRHH/ProyectosEdit.jsp";
+    String listar="/Views/RRHH/Trabajadores.jsp";
+    String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
+    String listarMarcaje = "/Views/RRHH/MarcajesEdit.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,21 +60,31 @@ public class Users extends HttpServlet {
             request.setAttribute("idUser", request.getParameter("id"));
             access = edit;
         }else if (action.equalsIgnoreCase("update")){
-            Project p = new Project();
-            CRUDProjects cpr = new CRUDProjects();
+            User u = new User();
+            CRUDUsers cu = new CRUDUsers();
             
             String id = request.getParameter("txtId");
-            String name = request.getParameter("txtNameProyect");
-            String empresaId = request.getParameter("txtEmpresaProyect");
+            String username = request.getParameter("txtUsername");
+            String name = request.getParameter("txtNombre");
+            String surname = request.getParameter("txtApellidos");
+            String dni = request.getParameter("txtDni");
+            String fecha_alta = request.getParameter("txtFecha");
             
-            p.setId_empresa(empresaId);
-            p.setId_proyecto(id);
-            p.setNombre(name);
             
             
-            cpr.edit(p);
+            u.setId(id);
+            u.setUsername(username);
+            u.setNombre(name);
+            u.setApellidos(surname);
+            u.setDni(dni);
+            
+            
+            cu.edit(u);
                 
             access = listar;
+        }else if (action.equalsIgnoreCase("mark")){
+            //terminar
+            access = listarMarcaje;
         }
         //en base a cada else if voy a un lugar o a otro
         RequestDispatcher view = request.getRequestDispatcher(access);
