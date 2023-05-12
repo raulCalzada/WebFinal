@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import Controller.RRHHController.Users;
+import Model.Project;
 import Model.User;
 import Utils.CRUDUsers;
 import Utils.Validate;
@@ -59,6 +61,54 @@ public class UserController extends HttpServlet {
                 request.getRequestDispatcher("/Views/PrincipalRRHH.jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }
+            
+            
+            
+        }else if(action.equalsIgnoreCase("editUser")){
+            //NOFUNCIONA
+            request.setAttribute("idUser", request.getParameter("id"));
+            request.getRequestDispatcher("/.jsp").forward(request, response);
+            
+            
+            
+            
+            
+            
+        }else if (action.equalsIgnoreCase("updateUser")){
+            //NOFUNCIONA
+            User u = new User();
+            CRUDUsers cu = new CRUDUsers();
+            Project p = new Project();
+            
+            String id = request.getParameter("txtId");
+            String username = request.getParameter("txtUsername");
+            String name = request.getParameter("txtNombre");
+            String surname = request.getParameter("txtApellidos");
+            String dni = request.getParameter("txtDni");
+            String fecha_alta = request.getParameter("txtFechaAlta");
+            String fecha_baja = request.getParameter("txtFechaBaja");
+            String proyecto = request.getParameter("txtProy");
+            String tipo = request.getParameter("txtTipo");
+            
+            u.setId(id);
+            u.setUsername(username);
+            u.setNombre(name);
+            u.setApellidos(surname);
+            u.setDni(dni);
+            u.setFecha_baja(fecha_baja);
+            u.setFecha_alta(fecha_alta);
+            p.setNombre(proyecto);
+            u.setProyecto(p);
+            u.setTipo(tipo);
+            
+            
+            try {
+                cu.edit(u, proyecto);
+            } catch (SQLException ex) {
+                Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            }catch (Exception e){
+                
             }
         }
     }
