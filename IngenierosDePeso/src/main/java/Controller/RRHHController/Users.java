@@ -5,6 +5,7 @@
 package Controller.RRHHController;
 
 
+import Model.Project;
 import Model.User;
 import Utils.CRUDProjects;
 import Utils.CRUDUsers;
@@ -59,34 +60,45 @@ public class Users extends HttpServlet {
         String action =request.getParameter("action");
         if(action.equalsIgnoreCase("listar")){
             access = listar;
-        }else if(action.equalsIgnoreCase("edit")){
+        }else if(action.equalsIgnoreCase("editUser")){
             request.setAttribute("idUser", request.getParameter("id"));
             access = edit;
-        }else if (action.equalsIgnoreCase("update")){
+        }else if (action.equalsIgnoreCase("updateUser")){
             User u = new User();
             CRUDUsers cu = new CRUDUsers();
+            Project p = new Project();
             
             String id = request.getParameter("txtId");
             String username = request.getParameter("txtUsername");
             String name = request.getParameter("txtNombre");
             String surname = request.getParameter("txtApellidos");
             String dni = request.getParameter("txtDni");
-            String fecha_alta = request.getParameter("txtFecha");
-            
-            
+            String fecha_alta = request.getParameter("txtFechaAlta");
+            String fecha_baja = request.getParameter("txtFechaBaja");
+            String proyecto = request.getParameter("txtProy");
+            String tipo = request.getParameter("txtTipo");
             
             u.setId(id);
             u.setUsername(username);
             u.setNombre(name);
             u.setApellidos(surname);
             u.setDni(dni);
+            u.setFecha_baja(fecha_baja);
+            u.setFecha_alta(fecha_alta);
+            p.setNombre(proyecto);
+            u.setProyecto(p);
+            u.setTipo(tipo);
             
             
             try {
-                cu.edit(u);
+                cu.edit(u, proyecto);
             } catch (SQLException ex) {
                 Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            }catch (Exception e){
+                
             }
+
+
                 
             access = listar;
         }else if (action.equalsIgnoreCase("mark")){

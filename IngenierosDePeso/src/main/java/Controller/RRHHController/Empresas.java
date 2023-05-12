@@ -29,8 +29,8 @@ public class Empresas extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String listar="/Views/RRHH/Empresas.jsp";
-    String edit= "/Views/RRHH/EmpresasEdit.jsp";
+    String listar="/Views/RRHH/Trabajadores.jsp";
+    String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

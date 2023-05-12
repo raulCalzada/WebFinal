@@ -67,18 +67,27 @@ public class CRUDUsers {
                 ps2= con.prepareStatement(sql);
                 //seleccionamos el id_proyecto correspondiente al usuario
                 aux= ps2.executeQuery("SELECT id_proyecto FROM rrhh.usuarios_proyectos where id_user='"+u.getId()+"'");
-
+                String praux = null;
+                while (aux.next()){
+                   praux  = aux.getString(1);
+                }
+                
                 //seleccionamos el proyecto
                 
-                rs2 = ps2.executeQuery("SELECT * FROM rrhh.proyectos where id_proyecto='"+aux+"'");
-                p.setId_proyecto(rs2.getString(1));
-                p.setNombre(rs2.getString(2));
-                p.setId_empresa(rs2.getString(3));
+                rs2 = ps2.executeQuery("SELECT * FROM rrhh.proyectos where id_proyecto='"+praux+"'");
+                while (rs2.next()){
+                    p.setId_proyecto(rs2.getString(1));
+                    p.setNombre(rs2.getString(2));
+                    p.setId_empresa(rs2.getString(3)); 
+                }
+                
                 
                 //seleccionamos la empresa asociada al proyecto y al trabajador
                 rs3= ps2.executeQuery("SELECT * FROM rrhh.empresa where id_empresa='"+p.getId_empresa() +"'");
-                e.setId_empresa(rs.getString(1));
-                e.setNombre_empresa(rs.getString(2));
+                while (rs3.next()){
+                e.setId_empresa(rs3.getString(1));
+                e.setNombre_empresa(rs3.getString(2));
+                }
                 u.setEmpresa(e);
                 u.setProyecto(p);
             }
@@ -90,16 +99,28 @@ public class CRUDUsers {
     }
     
 
-    public void edit(User u) throws SQLException {
-        String sql = "update rrhh.usuarios set  username='"+u.getUsername()+"',password='"+u.getPassword()+"',dni='"+u.getDni()+"',nombre='"+u.getNombre()+"',apellidos='"+u.getApellidos()+"',fecha_alta='"+u.getFecha_alta()+"',fecha_baja='"+u.getFecha_baja()+"' where id_user= '"+u.getId() + "'";
+    public void edit(User u, String projectName) throws SQLException {
+        
+        
+        String sql = "update rrhh.usuarios set  username='"+u.getUsername()+"',dni='"+u.getDni()+"',nombre='"+u.getNombre()+"',apellidos='"+u.getApellidos()+"',fecha_alta='"+u.getFecha_alta()+"',fecha_baja='"+u.getFecha_baja()+"' where id_user= '"+u.getId() + "'";
         con = cn.conect();
         ps= con.prepareStatement(sql);
         ps.executeUpdate();
         
+        
+        
         if (u.getTipo().equals("U")){
-            String sql2 = "update rrhh.usuarios_proyectos set id_proyecto='"+u.getProyecto().getId_proyecto()+"' where id_user='"+u.getId()+"'";
-            ps= con.prepareStatement(sql2);
-            ps.executeUpdate();
+            String sql2 = "SELECT id_proyecto FROM rrhh.proyectos where nombre='" +projectName+ "' LIMIT 1";
+            
+            String rsaux = null;
+            ps2 = con.prepareStatement(sql2);
+            rs2 = ps2.executeQuery(sql2);
+            while(rs2.next()){
+                rsaux = rs2.getString(1);
+            }
+            String sql3 = "update rrhh.usuarios_proyectos set id_proyecto='"+rsaux+"' where id_user='"+u.getId()+"'";
+            ps2= con.prepareStatement(sql3);
+            ps2.executeUpdate();
         }
         
     }
@@ -129,18 +150,27 @@ public class CRUDUsers {
                 ps2= con.prepareStatement(sql);
                 //seleccionamos el id_proyecto correspondiente al usuario
                 aux= ps2.executeQuery("SELECT id_proyecto FROM rrhh.usuarios_proyectos where id_user='"+u.getId()+"'");
-
-                //seleccionamos el proyecto
+                String auxid = null;
+                while (aux.next()){
+                    auxid = aux.getString(1);
+                }
                 
-                rs2 = ps2.executeQuery("SELECT * FROM rrhh.proyectos where id_proyecto='"+aux+"'");
-                p.setId_proyecto(rs2.getString(1));
-                p.setNombre(rs2.getString(2));
-                p.setId_empresa(rs2.getString(3));
+                //seleccionamos el proyecto
+                 rs2 = ps2.executeQuery("SELECT * FROM rrhh.proyectos where id_proyecto='"+auxid+"'");
+                while (rs2.next()){
+                    p.setId_proyecto(rs2.getString(1));
+                    p.setNombre(rs2.getString(2));
+                    p.setId_empresa(rs2.getString(3));
+                }
+                
                 
                 //seleccionamos la empresa asociada al proyecto y al trabajador
                 rs3= ps2.executeQuery("SELECT * FROM rrhh.empresa where id_empresa='"+p.getId_empresa() +"'");
-                e.setId_empresa(rs.getString(1));
-                e.setNombre_empresa(rs.getString(2));
+                while (rs3.next()){
+                    e.setId_empresa(rs3.getString(1));
+                    e.setNombre_empresa(rs3.getString(2));
+                }
+                
                 u.setEmpresa(e);
                 u.setProyecto(p);
             }

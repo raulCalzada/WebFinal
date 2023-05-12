@@ -57,7 +57,6 @@ public class CRUDProjects{
     public Project list(String id) throws SQLException{
         
         String sql = "SELECT * FROM rrhh.proyectos where id_proyecto="+id;
-        String sql_empresa = "SELECT * FROM rrhh.empresa";
         
         
         
