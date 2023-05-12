@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.User;
+import Utils.CRUDUsers;
 import Utils.Validate;
 import java.io.IOException;
 
@@ -12,6 +13,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -28,19 +32,30 @@ public class UserController extends HttpServlet {
     private Validate v = new Validate();
     
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
+        
+        
         if (action.equals("Login")){
+        //PARA EL LOGIN
             String usname = request.getParameter("txtUsername");
             String psw = request.getParameter("txtPassword");
             user.setUsername(usname);
             user.setPassword(psw);
             
+            
+           
             if(v.Valid(user) == 1){
+            //si es usuario tipo "U"
+                CRUDUsers uu = new CRUDUsers();
+                String u = uu.getUserId(usname,psw);
+                request.setAttribute("idUser", u);
                 request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
+            
             }else if(v.Valid(user) == 2){
+            //si es usuario tipo "A"
                 request.getRequestDispatcher("/Views/PrincipalRRHH.jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
@@ -51,13 +66,21 @@ public class UserController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

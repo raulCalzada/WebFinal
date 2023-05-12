@@ -178,5 +178,20 @@ public class CRUDUsers {
         return u;
         
     }
+    public String getUserId(String usname, String psw) throws SQLException {
+        User user = new User();
+        String sql = "SELECT id_user FROM usuarios where username='"+usname+"' and password= '"+usname+"'";
+        
+        con = cn.conect();
+        ps= con.prepareStatement(sql);
+        
+        rs = ps.executeQuery(sql);
+        String id = null;
+        while (rs.next()){
+            id = rs.getString(1);
+        }
+        
+        return id;
+    }
     
 }
