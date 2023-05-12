@@ -65,10 +65,10 @@ public class UserController extends HttpServlet {
             
             
             
-        }else if(action.equalsIgnoreCase("editUser")){
+        }else if(action.equalsIgnoreCase("edit")){
             //NOFUNCIONA
             request.setAttribute("idUser", request.getParameter("id"));
-            request.getRequestDispatcher("/.jsp").forward(request, response);
+            request.getRequestDispatcher("/Views/User/EditUser.jsp").forward(request, response);
             
             
             
@@ -110,6 +110,8 @@ public class UserController extends HttpServlet {
             }catch (Exception e){
                 
             }
+            request.setAttribute("idUser", u);
+            request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
         }
     }
 

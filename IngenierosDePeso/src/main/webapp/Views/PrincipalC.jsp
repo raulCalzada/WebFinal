@@ -119,7 +119,12 @@
 
     <%
         CRUDUsers crudUsers= new CRUDUsers();
-        String id = (String) request.getAttribute("idUser");
+        String id;
+        try{
+            id = (String) request.getAttribute("idUser");
+        }catch(Exception e){
+            id = request.getParameter("txtId");
+        }   
         User u = (User)crudUsers.list(id);
     %>
     <div class="container">
@@ -163,7 +168,7 @@
             </tr>
         </table>
         <div style="text-align: center;">
-            <a href="#" class="button">Editar Perfil</a>
+            <a href="UserController?action=edit&id=<%= u.getId()%>" class="button">Editar Perfil</a>
         </div>
     </div>
 </body>

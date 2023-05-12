@@ -180,7 +180,7 @@ public class CRUDUsers {
     }
     public String getUserId(String usname, String psw) throws SQLException {
         User user = new User();
-        String sql = "SELECT id_user FROM usuarios where username='"+usname+"' and password= '"+usname+"'";
+        String sql = "SELECT id_user FROM usuarios where username='"+usname+"' and password= '"+psw+"'";
         
         con = cn.conect();
         ps= con.prepareStatement(sql);
