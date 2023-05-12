@@ -6,7 +6,6 @@ body {
   background-image: url("../Public/rrhh.jpg");
   background-repeat : no-repeat;
   background-size: cover;
-  object-fit: fixed;
   display: flex; /* Muestra los elementos como elementos flex */
   flex-direction: column; /* Muestra los elementos en una columna */
   gap: 0; /* Elimina el espacio entre los elementos */
