@@ -5,6 +5,7 @@
 package Controller;
 
 import Controller.RRHHController.Users;
+import Model.Marcaje;
 import Model.Project;
 import Model.User;
 import Utils.CRUDUsers;
@@ -16,6 +17,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,7 +70,6 @@ public class UserController extends HttpServlet {
             
             
         }else if(action.equalsIgnoreCase("edit")){
-            //NOFUNCIONA
             request.setAttribute("idUser", request.getParameter("id"));
             request.getRequestDispatcher("/Views/User/EditUser.jsp").forward(request, response);
             
@@ -76,7 +79,7 @@ public class UserController extends HttpServlet {
             
             
         }else if (action.equalsIgnoreCase("updateUser")){
-            //NOFUNCIONA
+            //Edita el usuario con los parámetros indicados
             User u = new User();
             CRUDUsers cu = new CRUDUsers();
             Project p = new Project();
@@ -112,6 +115,52 @@ public class UserController extends HttpServlet {
             }
             request.setAttribute("idUser", u);
             request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
+        
+        
+        }else if(action.equalsIgnoreCase("addMarcaje")){
+            //NO FUNCIONA
+            User u = new User();
+            Marcaje m = new Marcaje();
+            CRUDUsers cu = new CRUDUsers();
+            //id del usuario
+            String id = request.getParameter("txtId");
+            
+            String tipoM = request.getParameter("txtTipoMarcaje");
+            String fecha = request.getParameter("txtFecha");
+            
+            //cambiar el formato de la fecha
+            String nuevoFormato = "yyyy-MM-dd HH:mm:ss";
+
+            LocalDateTime date = LocalDateTime.parse(fecha);
+            DateTimeFormatter formatoNuevo = DateTimeFormatter.ofPattern(nuevoFormato);
+            String fechaFormateada = date.format(formatoNuevo);
+            
+            
+            
+            //------------------------------------------
+            u = cu.list(id);
+            
+            m.setFecha(fechaFormateada);
+            m.setTipo_marcaje(tipoM);
+            m.setId_usuario(id);
+            
+            cu.setUserMarcajes(m);
+            
+            
+            request.setAttribute("idUser", u);
+            request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
+            
+            
+            
+
+            
+            
+            
+            
+        }else if(action.equalsIgnoreCase("marcaje")){
+            User u = new User();
+            request.setAttribute("idUser", request.getParameter("id"));
+            request.getRequestDispatcher("/Views/User/Marcaje.jsp").forward(request, response);
         }
     }
 
