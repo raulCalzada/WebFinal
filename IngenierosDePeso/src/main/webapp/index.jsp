@@ -25,7 +25,6 @@
                     <input type="Password" placeholder="Password" name="txtPassword" >
                     <p></p>
                     <button class="btn" name="action" value="Login">Login</button>
-                    <a class="my-button" href="Views/PrincipalRRHH.jsp">My Button</a>
                     <p></p>
                 </div>
             </div>
