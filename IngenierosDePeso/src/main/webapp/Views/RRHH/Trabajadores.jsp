@@ -34,6 +34,7 @@
                             <th>Empresa</th>
                             <th>Proyecto</th>
                             <th>Editar</th>
+                            <th>Marcajes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,6 +57,7 @@
                             <td><%= u.getProyecto().getNombre() %></td>
                             <!-- Para editar tomamos el valor ID_proyecto que se lo vamos a pasar al controlador -->
                             <td><a href="Users?action=editUser&id=<%= u.getId()%>"> Editar </a></td>
+                            <td><a href="Users?action=seeMarcaje&id=<%= u.getId()%>"> Ver Marcajes </a></td>
                         </tr>
                         <% }} %>
                     </tbody>

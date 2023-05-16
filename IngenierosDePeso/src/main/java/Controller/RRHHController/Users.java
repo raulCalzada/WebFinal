@@ -37,7 +37,7 @@ public class Users extends HttpServlet {
      */
     String listar="/Views/RRHH/Trabajadores.jsp";
     String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
-    String listarMarcaje = "/Views/RRHH/MarcajesEdit.jsp";
+    String listarMarcaje = "/Views/RRHH/Marcajes.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -101,10 +101,16 @@ public class Users extends HttpServlet {
 
                 
             access = listar;
-        }else if (action.equalsIgnoreCase("mark")){
-            //terminar
+        
+        
+        
+            
+        }else if(action.equalsIgnoreCase("seeMarcaje")){
+            User u = new User();
+            request.setAttribute("idUser", request.getParameter("id"));
             access = listarMarcaje;
         }
+        
         //en base a cada else if voy a un lugar o a otro
         RequestDispatcher view = request.getRequestDispatcher(access);
         view.forward(request, response);

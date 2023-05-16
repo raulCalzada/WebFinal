@@ -17,8 +17,6 @@
         <br>
         <a href="Empresas?action=listar"><button class="button-2">Empresas</button></a>
         <br>
-        <a href="#"><button class="button-3">Marcajes</button></a>
-        <br>
         <a href="Users?action=listar"><button class="button-4">Trabajadores</button></a>
         <br>
     </body>
