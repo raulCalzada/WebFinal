@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Marcaje
-    Created on : 12 may 2023, 22:38:40
+    Document   : VerMarcajes
+    Created on : 16 may 2023, 11:31:39
     Author     : raulc
 --%>
 
@@ -9,13 +9,12 @@
 <%@page import="Utils.CRUDUsers" %>
 <%@page import="Model.Project" %>
 <%@page import="Model.User" %>
-<%@page import="Model.Empresa" %>
+<%@page import="Model.Marcaje" %>
 <%@ page import="java.util.Iterator" %>
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Marcaje</title>
+        <title>Marcajes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -66,27 +65,32 @@
         </nav>
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <h2 class="mb-4">Marcaje</h2>
-                    <form action="UserController">
-                        <div class="form-group">
-                            <label for="fecha">Fecha:</label>
-                            <input type="datetime-local" id="fecha" name="txtFecha" class="form-control" step="1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tipo_marcaje">Tipo de marcaje:</label>
-                            <select id="tipo_marcaje" name="txtTipoMarcaje" class="form-control" required>
-                                <option value="E">Entrada</option>
-                                <option value="S">Salida</option>
-                            </select>
-                        </div>
-                        <input type="hidden" name="txtId" value="<%= u.getId()%>">
-                        
-                        <button type="submit" name="action" value="addMarcaje" class="btn btn-primary">Registrar marcaje</button>
-                    </form>
+                <div class="col-md-8">
+                    <h2 class="mb-4">Lista de Marcajes</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo de Marcaje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% crudUsers= new CRUDUsers();
+                           List<Marcaje> marcList = crudUsers.listarMarcajes(id);
+                           Iterator<Marcaje> itr = marcList.iterator();
+                           while(itr.hasNext()) {
+                               Marcaje m = itr.next();  
+                        %>
+                            <tr>
+                                <td><%= m.getFecha()%></td>
+                                <td><%= m.getTipo_marcaje()%></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
 
     </body>
 </html>
-

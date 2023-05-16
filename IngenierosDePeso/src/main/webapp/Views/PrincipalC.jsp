@@ -54,7 +54,7 @@
         User u = (User)crudUsers.list(id);
         %>
         <nav class="navbar navbar-expand-lg bg-dark">
-            <a style="color: white" class="navbar-brand" href="#">Cliente</a>
+            <a style="color: white" href="UserController?action=personal&id=<%= u.getId()%>" class="navbar-brand" href="#">Cliente</a>
             <ul class="navbar-nav mr-auto">
                 <!-- Aquí van los elementos del navbar a la izquierda -->
             </ul>
@@ -63,11 +63,15 @@
                     <a class="nav-link mx-auto" href="UserController?action=marcaje&id=<%= u.getId()%>">Realizar Marcaje</a>
                 </li>
             </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link mx-auto" href="UserController?action=seeMarcaje&id=<%= u.getId()%>">Ver Marcajes</a>
+                </li>
+            </ul>
             <div class="dropdown ml-auto">
-                <a style="color:white" href="../index.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Log out </a>
+                <a style="color:white" href="../../index.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Log out </a>
             </div>
         </nav>
-
         <style>
         /* Estilos CSS para la página */
         body {

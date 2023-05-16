@@ -117,6 +117,15 @@ public class UserController extends HttpServlet {
             request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
         
         
+        }else if(action.equalsIgnoreCase("marcaje")){
+            User u = new User();
+            request.setAttribute("idUser", request.getParameter("id"));
+            request.getRequestDispatcher("/Views/User/Marcaje.jsp").forward(request, response);
+            
+            
+            
+            
+            
         }else if(action.equalsIgnoreCase("addMarcaje")){
             //NO FUNCIONA
             User u = new User();
@@ -152,15 +161,21 @@ public class UserController extends HttpServlet {
             
             
             
-
             
             
             
             
-        }else if(action.equalsIgnoreCase("marcaje")){
+            
+        }else if(action.equalsIgnoreCase("seeMarcaje")){
             User u = new User();
             request.setAttribute("idUser", request.getParameter("id"));
-            request.getRequestDispatcher("/Views/User/Marcaje.jsp").forward(request, response);
+            request.getRequestDispatcher("/Views/User/VerMarcajes.jsp").forward(request, response);
+            
+            
+            
+        }else if(action.equalsIgnoreCase("personal")){
+            request.setAttribute("idUser", request.getParameter("id"));
+            request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
         }
     }
 

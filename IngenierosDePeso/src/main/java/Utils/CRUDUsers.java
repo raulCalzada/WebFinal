@@ -212,6 +212,7 @@ public class CRUDUsers {
     public List listarMarcajes(String id) throws SQLException{
         ArrayList<Marcaje> list = new ArrayList<Marcaje>();
         String sql = "SELECT * FROM rrhh.marcajes where id_usuario='"+id+"'";
+        con = cn.conect();
         ps= con.prepareStatement(sql);
         rs = ps.executeQuery(sql);
 
