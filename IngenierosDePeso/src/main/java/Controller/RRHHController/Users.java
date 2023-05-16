@@ -38,6 +38,7 @@ public class Users extends HttpServlet {
     String listar="/Views/RRHH/Trabajadores.jsp";
     String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
     String listarMarcaje = "/Views/RRHH/Marcajes.jsp";
+    String RRHH= "/Views/PrincipalRRHH.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -109,6 +110,10 @@ public class Users extends HttpServlet {
             User u = new User();
             request.setAttribute("idUser", request.getParameter("id"));
             access = listarMarcaje;
+        }
+        
+        else if(action.equalsIgnoreCase("menu")){
+            access = RRHH;
         }
         
         //en base a cada else if voy a un lugar o a otro

@@ -8,16 +8,72 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>RRHH</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RRHH - Recursos Humanos</title>
+        <style>
+            body {
+                background: linear-gradient(to bottom, #286DA8, #CCCCCC);
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #f5f5f5;
+            }
+
+            .container {
+                width: 400px;
+                height: 400px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .container-title {
+                color: #333;
+                margin-top: 0;
+            }
+
+
+            h1 {
+                color: #333;
+                margin-top: 0;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                margin: 10px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 4px;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+
+            .button:hover {
+                background-color: #0056b3;
+            }
+        </style>
     </head>
-    
+
     <body>
-        <a href="Projects?action=listar"><button class="button-1" >Proyectos</button></a>
-        <br>
-        <a href="Empresas?action=listar"><button class="button-2">Empresas</button></a>
-        <br>
-        <a href="Users?action=listar"><button class="button-4">Trabajadores</button></a>
-        <br>
+        <div class="container">
+            <h1 class="container-title">Recursos Humanos</h1>
+            <br>
+            <a href="Projects?action=listar" class="button" >Proyectos</a>
+            <a href="Empresas?action=listar" class="button" >Empresas</a>
+            <a href="Users?action=listar" class="button">Trabajadores</a>
+        </div>
+
     </body>
 </html>

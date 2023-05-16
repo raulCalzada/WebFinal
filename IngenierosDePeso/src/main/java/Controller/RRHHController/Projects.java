@@ -34,6 +34,7 @@ public class Projects extends HttpServlet {
      */
     String listar="/Views/RRHH/Proyectos.jsp";
     String edit= "/Views/RRHH/ProyectosEdit.jsp";
+    String RRHH= "/Views/PrincipalRRHH.jsp";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -68,6 +69,8 @@ public class Projects extends HttpServlet {
             cpr.edit(p);
                 
             access = listar;
+        }else if(action.equalsIgnoreCase("menu")){
+            access = RRHH;
         }
         //en base a cada else if voy a un lugar o a otro
         RequestDispatcher view = request.getRequestDispatcher(access);

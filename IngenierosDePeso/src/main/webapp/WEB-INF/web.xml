@@ -13,10 +13,6 @@
         <servlet-class>Controller.RRHHController.Empresas</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Marcajes</servlet-name>
-        <servlet-class>Controller.RRHHController.Marcajes</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Users</servlet-name>
         <servlet-class>Controller.RRHHController.Users</servlet-class>
     </servlet>
@@ -31,10 +27,6 @@
     <servlet-mapping>
         <servlet-name>Empresas</servlet-name>
         <url-pattern>/Empresas</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Marcajes</servlet-name>
-        <url-pattern>/Marcajes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Users</servlet-name>
