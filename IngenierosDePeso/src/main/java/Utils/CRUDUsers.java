@@ -7,6 +7,7 @@ package Utils;
 
 import Model.Connect;
 import Model.Empresa;
+import Model.Marcaje;
 import Model.Project;
 import Model.User;
 import java.sql.Connection;
@@ -178,5 +179,58 @@ public class CRUDUsers {
         return u;
         
     }
+    public String getUserId(String usname, String psw) throws SQLException {
+        User user = new User();
+        String sql = "SELECT id_user FROM usuarios where username='"+usname+"' and password= '"+psw+"'";
+        
+        con = cn.conect();
+        ps= con.prepareStatement(sql);
+        
+        rs = ps.executeQuery(sql);
+        String id = null;
+        while (rs.next()){
+            id = rs.getString(1);
+        }
+        
+        return id;
+    }
+    /**
+     * insertamos un nuevo marcaje a nuestra base de datos
+     * @param m 
+     */
+    public void setUserMarcajes(Marcaje m) throws SQLException{
+       
+        String sql = "INSERT INTO rrhh.marcajes (id, fecha, tipo_marcaje, id_usuario) \n" +
+                    "SELECT m.max_id + 1, '"+m.getFecha()+"', '"+m.getTipo_marcaje()+"', '"+m.getId_usuario()+"'\n" +
+                    "FROM (SELECT MAX(id) as max_id FROM rrhh.marcajes) m;";
+        ps= con.prepareStatement(sql);
+        ps.executeUpdate();
+        
+    }
     
+    
+    public List listarMarcajes(String id) throws SQLException{
+        ArrayList<Marcaje> list = new ArrayList<Marcaje>();
+        String sql = "SELECT * FROM rrhh.marcajes where id_usuario='"+id+"'";
+        con = cn.conect();
+        ps= con.prepareStatement(sql);
+        rs = ps.executeQuery(sql);
+
+        while (rs.next()){
+            Marcaje m = new Marcaje();
+            
+            String idM = rs.getString(1);
+            String fecha = rs.getString(2);
+            String tipo = rs.getString(3);
+            
+            m.setId_marcaje(idM);
+            m.setFecha(fecha);
+            m.setTipo_marcaje(tipo);
+            m.setId_usuario(id);
+            
+            list.add(m);
+        }
+        
+        return list;
+    }
 }
