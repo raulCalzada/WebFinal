@@ -54,7 +54,7 @@ CREATE TABLE `marcajes` (
   PRIMARY KEY (`id`),
   KEY `marcajes_usuarios_id_user_fk` (`id_usuario`),
   CONSTRAINT `marcajes_usuarios_id_user_fk` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +63,7 @@ CREATE TABLE `marcajes` (
 
 LOCK TABLES `marcajes` WRITE;
 /*!40000 ALTER TABLE `marcajes` DISABLE KEYS */;
+INSERT INTO `marcajes` VALUES (1,'2023-02-22 10:15:57','E',1),(2,'2023-02-22 10:15:57','S',2),(3,'2023-02-22 10:15:57','E',3),(4,'2023-05-15 23:46:26','E',3),(5,'2023-05-16 13:00:27','S',3),(6,'2023-05-12 16:00:47','S',3),(7,'2023-05-17 14:07:03','S',3),(8,'2023-05-16 13:07:08','E',2),(9,'2023-05-09 08:01:17','E',2),(10,'2023-05-17 13:07:38','S',2),(11,'2023-05-16 07:53:50','E',4),(12,'2023-05-16 13:54:09','S',4),(13,'2023-05-17 16:53:13','E',3);
 /*!40000 ALTER TABLE `marcajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +90,7 @@ CREATE TABLE `proyectos` (
 
 LOCK TABLES `proyectos` WRITE;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` VALUES (1,'ArnLogistic',1),(2,'ArnPayment',1),(3,'WebToyotaService',2),(4,'ElectricLogistic',4),(5,'AmazonLogistic',3),(6,'AwsCloud',3),(7,'AwsPayments',3),(8,'ElectricLogistics',4),(9,'GambleDatabases',6),(10,'FedexUtils',5);
+INSERT INTO `proyectos` VALUES (1,'ArnLogistic',1),(2,'ArnPayment',1),(3,'WebToyotaService',2),(4,'ElectricLogistics',4),(5,'AmazonLogistic',3),(6,'AwsClouds',3),(7,'AwsPayments',3),(8,'ElectricLogistics',4),(9,'GambleDatabases',6),(10,'FedexUtils',5);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +121,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'admin','admin','99999999Z','Admin','admin','2023-02-22 10:15:57','2023-02-22 10:25:20','A'),(2,'usuario','usuario','88888888T','usuario','demo','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(3,'usuario1','usuario','95940962G','Raul','Calzada','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(4,'usuario2','usuario','98223734A','Marco','Aurelio','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(5,'usuario3','usuario','98223734A','Juan Carlos','de Borbón','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(6,'usuario4','usuario','42997956P','Felipe','Rodriguez','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(7,'usuario5','usuario','74776547M','Jose Carlos','Martinez','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(8,'usuario6','usuario','41936734Y','Marcos','Marquez','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(9,'usuario7','usuario','58207971P','Ainara','Campos','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(10,'usuario8','usuario','00564950R','Fabiola','Durán','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(11,'usuario9','usuario','04400996S','María','García','2023-02-22 10:25:20',NULL,'U'),(12,'usuario10','usuario','60604935G','Daniel','Campos','2023-02-22 10:25:20',NULL,'U'),(13,'usuario11','usuario','63724964Z','Rodrigo','Martin','2023-02-22 10:25:20',NULL,'U'),(14,'usuario12','usuario','04823289M','Ruben','Castro','2023-02-22 10:25:20',NULL,'U'),(15,'usuario13','usuario','05454384A','Manuel','Fando','2023-02-22 10:25:20',NULL,'U'),(16,'usuario14','usuario','69896852J','Natalia','Obrero','2023-02-22 10:25:20',NULL,'U'),(17,'usuario15','usuario','48882052Z','Carlota','Marquez','2023-02-22 10:25:20',NULL,'U'),(18,'usuario16','usuario','70416970D','Roberto','Maldonado','2023-02-22 10:25:20',NULL,'U'),(19,'usuario17','usuario','04913818Y','Roberto','Carrillo','2023-02-22 10:25:20',NULL,'U'),(20,'usuario18','usuario','87353141S','Juan Manuel','Vazquez','2023-02-22 10:25:20',NULL,'U');
+INSERT INTO `usuarios` VALUES (1,'admin','admin','99999999Z','Admin','admin','2023-02-22 10:15:57','2023-02-22 10:25:20','A'),(2,'usuario','usuario','88888888T','usuario','demo','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(3,'usuario1','usuario','09122236E','Raul','Calzada Maldonado','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(4,'usuario2','usuario','98223734A','Marco','Aurelio','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(5,'usuario3','usuario','98223734A','Juan Carlos','de Borbón','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(6,'usuario4','usuario','42997956P','Felipe','Rodriguez','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(7,'usuario5','usuario','74776547M','Jose Carlos','Martinez','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(8,'usuario6','usuario','41936734Y','Marcos','Marquez','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(9,'usuario7','usuario','58207971P','Ainara','Campos','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(10,'usuario8','usuario','00564950R','Fabiola','Durán','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(11,'usuario9','usuario','04400996S','María','García','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(12,'usuario10','usuario','60604935G','Daniel','Campos','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(13,'usuario11','usuario','63724964Z','Rodrigo','Martin','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(14,'usuario12','usuario','04823289M','Ruben','Castro','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(15,'usuario13','usuario','05454384A','Manuel','Fando','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(16,'usuario14','usuario','69896852J','Natalia','Obrero','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(17,'usuario15','usuario','48882052Z','Carlota','Marquez','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(18,'usuario16','usuario','70416970D','Jorge','Maldonado','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(19,'usuario17','usuario','04913818Y','Carlos','Carrillo','2023-02-22 10:25:20','2023-02-22 10:25:20','U'),(20,'usuario18','usuario','87353141S','Juan Manuel','Vazquez','2023-02-22 10:25:20','2023-02-22 10:25:20','U');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +152,7 @@ CREATE TABLE `usuarios_proyectos` (
 
 LOCK TABLES `usuarios_proyectos` WRITE;
 /*!40000 ALTER TABLE `usuarios_proyectos` DISABLE KEYS */;
-INSERT INTO `usuarios_proyectos` VALUES (1,2,1,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(2,3,1,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(3,4,1,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(4,5,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(5,6,3,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(6,7,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(7,8,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(8,9,3,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(9,10,3,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(10,11,4,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(11,12,4,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(12,13,4,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(13,14,5,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(14,15,5,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(15,16,5,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(16,17,6,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(17,18,6,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(18,19,6,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(19,20,3,'2023-02-22 10:25:20','2024-02-22 10:25:20');
+INSERT INTO `usuarios_proyectos` VALUES (1,2,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(2,3,1,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(3,4,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(4,5,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(5,6,3,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(6,7,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(7,8,2,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(8,9,3,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(9,10,3,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(10,11,4,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(11,12,4,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(12,13,4,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(13,14,5,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(14,15,5,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(15,16,5,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(16,17,6,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(17,18,6,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(18,19,6,'2023-02-22 10:25:20','2024-02-22 10:25:20'),(19,20,3,'2023-02-22 10:25:20','2024-02-22 10:25:20');
 /*!40000 ALTER TABLE `usuarios_proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -164,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-12 13:39:45
+-- Dump completed on 2023-05-17 12:10:07

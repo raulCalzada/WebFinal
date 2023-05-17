@@ -29,8 +29,9 @@ public class Empresas extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String listar="/Views/RRHH/Trabajadores.jsp";
-    String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
+    String listar="/Views/RRHH/Empresas.jsp";
+    String edit= "/Views/RRHH/EmpresasEdit.jsp";
+    String RRHH= "/Views/PrincipalRRHH.jsp";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -62,6 +63,8 @@ public class Empresas extends HttpServlet {
             ce.edit(e);
             
             access = listar;
+        }else if(action.equalsIgnoreCase("menu")){
+            access = RRHH;
         }
        //en base a cada else if voy a un lugar o a otro
         RequestDispatcher view = request.getRequestDispatcher(access);
