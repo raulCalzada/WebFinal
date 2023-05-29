@@ -23,6 +23,7 @@ public class Validate {
     PreparedStatement ps;
     ResultSet rs; 
     int r = 0;
+    private Log log;
     
     public int Valid(User user){
         String sql = "SELECT username,password,tipo_usuario FROM rrhh.usuarios  ";
@@ -48,8 +49,14 @@ public class Validate {
                 pw =  user.getPassword();
                 
                 if (usernames.get(i).equals(user.getUsername()) && passwords.get(i).equals(user.getPassword())){     
-                    if (typeUser.get(i).equals("U")) return 1;
-                    else return 2;
+                    if (typeUser.get(i).equals("U")){
+                        Log.log.info("Usuario "+us+" de tipo U\n");
+                        return 1;
+                    }
+                    else{
+                        Log.log.info("Usuario "+us+" de tipo A\n");
+                        return 2;
+                    }
   
                 }
             } 

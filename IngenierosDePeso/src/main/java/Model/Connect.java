@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Utils.Log;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class Connect {
     String url="jdbc:mysql://localhost:3306/"; //?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDateTimeCode=false&serverTimezone=UTC
     String driver= "com.mysql.cj.jdbc.Driver";
     Connection cx;
+    private Log log;
     
     public Connect (){
         

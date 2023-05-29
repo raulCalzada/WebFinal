@@ -26,6 +26,7 @@ public class CRUDProjects{
     ResultSet rs;
     ResultSet rs2;
     Project p = new Project();
+    private Log log;
     
     
     

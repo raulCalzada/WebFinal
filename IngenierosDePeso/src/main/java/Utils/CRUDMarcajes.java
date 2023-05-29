@@ -26,6 +26,7 @@ public class CRUDMarcajes {
     ResultSet rs2;
     Project p = new Project();
     Marcaje m = new Marcaje();
+    private Log log;
     
     public List listarMarcajes() throws SQLException{
         ArrayList<Marcaje> list = new ArrayList<Marcaje>();

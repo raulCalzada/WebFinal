@@ -6,6 +6,7 @@ package Controller.RRHHController;
 
 import Model.Empresa;
 import Utils.CRUDEmpresas;
+import Utils.Log;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -32,7 +33,7 @@ public class Empresas extends HttpServlet {
     String listar="/Views/RRHH/Empresas.jsp";
     String edit= "/Views/RRHH/EmpresasEdit.jsp";
     String RRHH= "/Views/PrincipalRRHH.jsp";
-    
+    private Log log;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

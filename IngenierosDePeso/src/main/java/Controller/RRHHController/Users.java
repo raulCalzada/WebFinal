@@ -9,6 +9,7 @@ import Model.Project;
 import Model.User;
 import Utils.CRUDProjects;
 import Utils.CRUDUsers;
+import Utils.Log;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -39,6 +40,7 @@ public class Users extends HttpServlet {
     String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
     String listarMarcaje = "/Views/RRHH/Marcajes.jsp";
     String RRHH= "/Views/PrincipalRRHH.jsp";
+    private Log log;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
