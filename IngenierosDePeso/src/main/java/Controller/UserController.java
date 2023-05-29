@@ -54,20 +54,21 @@ public class UserController extends HttpServlet {
             user.setUsername(usname);
             user.setPassword(psw);
             
-            
+            CRUDUsers uu = new CRUDUsers();
            
             if(v.Valid(user) == 1){
             //si es usuario tipo "U"
-                CRUDUsers uu = new CRUDUsers();
                 String u = uu.getUserId(usname,psw);
                 loginCookie = new Cookie("idUser",u);
                 loginCookie.setMaxAge(30*60); 
                 response.addCookie(loginCookie);
-                
-                request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
-            
+                request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);           
             }else if(v.Valid(user) == 2){
             //si es usuario tipo "A"
+                String u = uu.getUserId(usname,psw);
+                loginCookie = new Cookie("idUser",u);
+                loginCookie.setMaxAge(30*60); 
+                response.addCookie(loginCookie);
                 request.getRequestDispatcher("/Views/PrincipalRRHH.jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
@@ -75,11 +76,9 @@ public class UserController extends HttpServlet {
             
             
             
+            
         }else if(action.equalsIgnoreCase("edit")){
-            
             request.getRequestDispatcher("/Views/User/EditUser.jsp").forward(request, response);
-            
-            
             
             
             
@@ -109,9 +108,7 @@ public class UserController extends HttpServlet {
             u.setFecha_alta(fecha_alta);
             p.setNombre(proyecto);
             u.setProyecto(p);
-            u.setTipo(tipo);
-            
-            
+            u.setTipo(tipo);            
             try {
                 cu.edit(u, proyecto);
             } catch (SQLException ex) {
@@ -127,8 +124,7 @@ public class UserController extends HttpServlet {
             
             
             
-            
-            
+  
         }else if(action.equalsIgnoreCase("addMarcaje")){
             //NO FUNCIONA
             User u = new User();
@@ -146,9 +142,7 @@ public class UserController extends HttpServlet {
             LocalDateTime date = LocalDateTime.parse(fecha);
             DateTimeFormatter formatoNuevo = DateTimeFormatter.ofPattern(nuevoFormato);
             String fechaFormateada = date.format(formatoNuevo);
-            
-            
-            
+
             //------------------------------------------
             u = cu.list(id);
             
@@ -163,13 +157,9 @@ public class UserController extends HttpServlet {
             
             
             
-            
-            
-            
-            
+  
             
         }else if(action.equalsIgnoreCase("seeMarcaje")){
-
             request.getRequestDispatcher("/Views/User/VerMarcajes.jsp").forward(request, response);
             
             

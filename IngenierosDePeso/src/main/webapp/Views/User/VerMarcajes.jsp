@@ -69,7 +69,7 @@
                 </li>
             </ul>
             <div class="dropdown ml-auto">
-                <a style="color:white" href="../../index.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Log out </a>
+                <a style="color:white" href="UserController?action=logout&id=<%= u.getId()%>" class="nav-link dropdown-toggle" data-toggle="dropdown">Log out </a>
             </div>
         </nav>
         <div class="container mt-5">
