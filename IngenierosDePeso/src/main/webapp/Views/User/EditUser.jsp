@@ -77,7 +77,16 @@
   </head>
   <body>
       <%  CRUDUsers crudUsers= new CRUDUsers();
-            String id = (String) request.getAttribute("idUser");
+            String id;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
             User u = (User)crudUsers.list(id);
         %>
     <div class="container">

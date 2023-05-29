@@ -13,6 +13,7 @@ import Utils.Validate;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -36,6 +37,8 @@ public class UserController extends HttpServlet {
     private User user = new User();
     private int r = 0;
     private Validate v = new Validate();
+    private Cookie loginCookie;
+    
     
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -57,7 +60,10 @@ public class UserController extends HttpServlet {
             //si es usuario tipo "U"
                 CRUDUsers uu = new CRUDUsers();
                 String u = uu.getUserId(usname,psw);
-                request.setAttribute("idUser", u);
+                loginCookie = new Cookie("idUser",u);
+                loginCookie.setMaxAge(30*60); 
+                response.addCookie(loginCookie);
+                
                 request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
             
             }else if(v.Valid(user) == 2){
@@ -70,7 +76,7 @@ public class UserController extends HttpServlet {
             
             
         }else if(action.equalsIgnoreCase("edit")){
-            request.setAttribute("idUser", request.getParameter("id"));
+            
             request.getRequestDispatcher("/Views/User/EditUser.jsp").forward(request, response);
             
             
@@ -113,13 +119,10 @@ public class UserController extends HttpServlet {
             }catch (Exception e){
                 
             }
-            request.setAttribute("idUser", u);
             request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
         
         
         }else if(action.equalsIgnoreCase("marcaje")){
-            User u = new User();
-            request.setAttribute("idUser", request.getParameter("id"));
             request.getRequestDispatcher("/Views/User/Marcaje.jsp").forward(request, response);
             
             
@@ -156,7 +159,6 @@ public class UserController extends HttpServlet {
             cu.setUserMarcajes(m);
             
             
-            request.setAttribute("idUser", u);
             request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
             
             
@@ -167,15 +169,33 @@ public class UserController extends HttpServlet {
             
             
         }else if(action.equalsIgnoreCase("seeMarcaje")){
-            User u = new User();
-            request.setAttribute("idUser", request.getParameter("id"));
+
             request.getRequestDispatcher("/Views/User/VerMarcajes.jsp").forward(request, response);
             
             
             
         }else if(action.equalsIgnoreCase("personal")){
-            request.setAttribute("idUser", request.getParameter("id"));
             request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
+        
+            
+        }else if(action.equalsIgnoreCase("logout")){
+            loginCookie = null;
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null){
+                for(Cookie cookie : cookies){
+                    if(cookie.getName().equals("idUser")){
+                        loginCookie = cookie;
+                        break;
+                    }
+                }
+            }
+            if(loginCookie != null){
+                loginCookie.setValue("");
+                loginCookie.setMaxAge(-1);
+                response.addCookie(loginCookie);
+            }
+            
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

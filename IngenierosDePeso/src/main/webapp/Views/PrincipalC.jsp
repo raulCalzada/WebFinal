@@ -45,12 +45,18 @@
             </style>
             <%
             CRUDUsers crudUsers= new CRUDUsers();
-            String id;
-            try{
-                id = (String) request.getAttribute("idUser");
-            }catch(Exception e){
-                id = request.getParameter("txtId");
-            }   
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
             User u = (User)crudUsers.list(id);
             %>
             <nav class="navbar navbar-expand-lg bg-dark">
@@ -69,7 +75,7 @@
                         </li>
                     </ul>
                     <div class="dropdown ml-auto">
-                        <a style="color:white" href="../../index.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown">Log out </a>
+                        <a style="color:white" href="UserController?action=logout&id=<%= u.getId()%>" class="nav-link dropdown-toggle" data-toggle="dropdown">Log out </a>
                     </div>
                 </nav>
                 <style>
