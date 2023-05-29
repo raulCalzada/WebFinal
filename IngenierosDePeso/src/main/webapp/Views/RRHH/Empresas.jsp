@@ -83,6 +83,30 @@
                 border-radius: 5px;
                 text-decoration: none;
             }
+            /* Estilos para el popup */
+            .popup-overlay {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+
+            .popup-content {
+                background-color: #fff;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                width: 300px;
+                height: 200px;
+            }
         </style>
     </head>
     <body>
@@ -103,7 +127,10 @@
                         %>
                         <tr>
                             <td><%= e.getNombre_empresa() %></td>
-                            <td><a href="Empresas?action=edit&id=<%= e.getId_empresa()%>">Editar</a></td>
+                            <td>
+                                <a href="Empresas?action=edit&id=<%= e.getId_empresa()%>">Editar</a>
+                                <a href="#" onclick="mostrarPopup('<%= e.getId_empresa() %>', '<%= e.getNombre_empresa() %>')">Generar Informe</a>
+                            </td>
                         </tr>
                         <% } %>
                     </tbody>
@@ -113,5 +140,41 @@
                 </div>
             </div>
         </div>
+        <script>
+            function mostrarPopup(idEmpresa, nombre) {
+                var popup = document.getElementById('popup');
+                var popupHeader = document.getElementById('popupHeader');
+                popupHeader.textContent = 'Contenido del informe para la empresa: ' + nombre;
+                popup.style.display = 'flex';
+                idEmpresaInput.value = idEmpresa;
+            }
+
+        </script>
+
+
+
+        <!-- Popup -->
+        <div id="popup" class="popup-overlay" style="display: none;">
+            <form action="Empresas">
+                <div class="popup-content">
+                    <header id="popupHeader"></header>
+                    <br>
+                    <br>
+                    <input type="hidden" name="idEmpresa" value="" id="idEmpresaInput">
+                    <div class="form-group">
+                        <label for="fecha">Desde:</label>
+                        <input type="datetime-local" id="fecha" name="txtFechaDesde" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="fecha">Hasta:</label>
+                        <input type="datetime-local" id="fecha" name="txtFechaHasta" class="form-control" required>
+                    </div>
+                     <button type="submit" class="btn" name="action" value="informe">Generar Informe</button>
+                </div>
+            </form>
+        </div>
+
+
     </body>
 </html>

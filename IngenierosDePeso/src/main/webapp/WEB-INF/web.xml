@@ -16,6 +16,10 @@
         <servlet-name>Users</servlet-name>
         <servlet-class>Controller.RRHHController.Users</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PdfController</servlet-name>
+        <servlet-class>Controller.RRHHController.PdfController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Users</servlet-name>
         <url-pattern>/Users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PdfController</servlet-name>
+        <url-pattern>/PdfController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
