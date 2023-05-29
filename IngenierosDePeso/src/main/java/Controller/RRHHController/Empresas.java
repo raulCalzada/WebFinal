@@ -152,9 +152,9 @@ public class Empresas extends HttpServlet {
                     marcajesList = (ArrayList<Marcaje>) crudU.listarMarcajes(u.getId());
                     if (marcajesList != null){
                         for (int y = 0; y < marcajesList.size(); y++){
-                            String auxFecha = marcajesList.get(i).getFecha();
+                            String auxFecha = marcajesList.get(y).getFecha();
                             if  (utilFecha.fechaMenorIgualFecha(desde, auxFecha, hasta)){
-                                escritor.write(marcajesList.get(i).getTipo_marcaje()+" fecha: "+marcajesList.get(i).getFecha() + "\n");
+                                escritor.write(marcajesList.get(y).getTipo_marcaje()+" fecha: "+marcajesList.get(i).getFecha() + "\n");
                             }
                         }
                     }
