@@ -27,6 +27,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -61,9 +64,13 @@ public class Empresas extends HttpServlet {
         if (action.equalsIgnoreCase("listar")) {
             Log.log.info("listar \n");
             access = listar;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
         } else if (action.equalsIgnoreCase("edit")) {
             request.setAttribute("idempres", request.getParameter("id"));
             access = edit;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
         } else if (action.equalsIgnoreCase("update")) {
             Empresa e = new Empresa();
             CRUDEmpresas ce = new CRUDEmpresas();
@@ -77,84 +84,60 @@ public class Empresas extends HttpServlet {
             ce.edit(e);
 
             access = listar;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
         } else if (action.equalsIgnoreCase("menu")) {
             access = RRHH;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
         } else if (action.equals("informe")) {
-
-            OutputStream out = response.getOutputStream();
             String desde = request.getParameter("txtFechaDesde");
             String hasta = request.getParameter("txtFechaHasta");
             Empresa e = new Empresa();
             CRUDEmpresas crudE = new CRUDEmpresas();
             CRUDUsers crudU = new CRUDUsers();
+            ArrayList<User> userList = new ArrayList<>();
 
             try {
                 e = crudE.list(request.getParameter("txtIdEmpresa"));
-                ArrayList<User> userList = new ArrayList<>();
+
                 userList = (ArrayList<User>) crudU.listar();
                 for (int i = 0; i < userList.size(); i++) {
-                    User u = new User();
-                    u = crudU.list(userList.get(i).getId());
-                    if (u.getTipo().equals("A")) {
+                    User u = userList.get(i);
+                    u = crudU.list(u.getId());
+                    String idEmpresa = request.getParameter("txtIdEmpresa");
+                    if (u.getTipo().equals("A") || !u.getEmpresa().getId_empresa().equals(idEmpresa)) {
                         userList.remove(i);
-                    } else if (u.getEmpresa().getId_empresa().equals(request.getParameter("txtIdEmpresa"))) {
-                        userList.remove(i);
+                        i--;
                     }
                 }
+
+                String contenido = "Contenido \n";
+                String[] registros = {
+                    "ID\tNombre\tApellido\tEdad",
+                    "1\tJuan\tPérez\t25",
+                    "2\tMaría\tLópez\t30",
+                    "3\tCarlos\tGonzález\t28",
+                    "4\tLaura\tGarcía\t22"
+                };
+
+                response.setContentType("text/plain");
+                response.setHeader("Content-Disposition", "attachment; filename=\"Informe Empresa" + e.getNombre_empresa() + ".txt\"");
+
+                PrintWriter escritor = response.getWriter();
+                escritor.write(contenido);
+                for (String registro : registros) {
+                    escritor.write(registro + "\n");
+                }
+                escritor.close();
+
             } catch (SQLException ex) {
                 Logger.getLogger(Empresas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            String outputFile = "InformeEmpresas.pdf";
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            // Crear el objeto PdfWriter
-            PdfWriter writer = new PdfWriter(baos);
-
-            // Crear el objeto PdfDocument
-            PdfDocument pdfDoc = new PdfDocument(writer);
-
-            // Crear el objeto Document
-            Document doc = new Document(pdfDoc);
-
-            // Crear la tabla para el listado de trabajadores
-            Table table = new Table(3); // 3 columnas para nombre, apellidos y DNI
-
-            // Agregar encabezados de columna a la tabla
-            table.addCell("Nombre");
-            table.addCell("Apellidos");
-            table.addCell("DNI");
-
-            // Agregar filas con datos de los trabajadores a la tabla
-            table.addCell("Juan");
-            table.addCell("Pérez");
-            table.addCell("12345678A");
-
-            table.addCell("María");
-            table.addCell("López");
-            table.addCell("98765432B");
-
-            // Agregar la tabla al documento
-            doc.add(table);
-
-            // Cerrar el documento
-            doc.close();
-            byte[] pdfBytes = baos.toByteArray();
-
-            response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=InformeEmpresas.pdf");
-
-            try (OutputStream outf = response.getOutputStream()) {
-                writer.flush();
-                writer.close();
-                outf.flush();
             }
 
         }
 
         //en base a cada else if voy a un lugar o a otro
-        RequestDispatcher view = request.getRequestDispatcher(access);
-
-        view.forward(request, response);
     }
 
     /**
