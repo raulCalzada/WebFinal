@@ -20,17 +20,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -96,7 +90,6 @@ public class Empresas extends HttpServlet {
         } else if (action.equals("informe")) {
             String desde = request.getParameter("txtFechaDesde");
             String hasta = request.getParameter("txtFechaHasta");
-            String ei = (request.getParameter("idEmpresa"));
             Empresa e = new Empresa();
             CRUDEmpresas crudE = new CRUDEmpresas();
             CRUDUsers crudU = new CRUDUsers();
@@ -109,57 +102,50 @@ public class Empresas extends HttpServlet {
                 for (int i = 0; i < userList.size(); i++) {
                     User u = userList.get(i);
                     u = crudU.list(u.getId());
-                    String idEmpresa = request.getParameter("txtIdEmpresa");
-                    if (u.getTipo().equals("A")) {
+                    if (u.getTipo().equals("A") || !u.getEmpresa().getId_empresa().equals(e.getId_empresa())) {
                         userList.remove(i);
-                        
+
                     }
                 }
-
-                
-                String[] registros = {
-                    
-                };
-
+                //iniciamos el txt----------------------------
                 response.setContentType("text/plain");
                 response.setHeader("Content-Disposition", "attachment; filename=\"Informe Empresa" + e.getNombre_empresa() + ".txt\"");
 
                 PrintWriter escritor = response.getWriter();
-                
-                //escritura del TXT
+
+                //escritura del TXT---------------------------
                 escritor.write("\n");
-                escritor.write("INFORME DE LA EMPRESA "+e.getNombre_empresa()+" \n");
+                escritor.write("INFORME DE LA EMPRESA " + e.getNombre_empresa() + " \n");
                 escritor.write("\n");
                 escritor.write("------------------------------------------------------------------------\n");
-                escritor.write("Marcajes entre las fechas "+desde+" y "+hasta+ "\n");
+                escritor.write("Marcajes entre las fechas " + desde + " y " + hasta + "\n");
                 escritor.write("\n");
                 escritor.write("\\Username\\DNI\\Nombre\\Apellidos\\FechaAlta\\FechaBaja\\Proyecto \n");
                 escritor.write("------------------------------------------------------------------------\n");
                 escritor.write("\n");
 
-                
-                
                 ArrayList<Marcaje> marcajesList = new ArrayList<>();
-                for(int i = 0; i < userList.size(); i++){
-                    
+                for (int i = 0; i < userList.size(); i++) {
+
                     User u = userList.get(i);
                     u = crudU.list(u.getId());
-                    escritor.write("\n------------------------------------------------------------------------\n");
-                    escritor.write("\n");
-                    escritor.write("\n"+u.getUsername()+"\\"+u.getDni()+"\\"+u.getNombre()+"\\"+u.getApellidos()+"\\"+u.getFecha_alta()+"\\"+u.getFecha_baja()+"\\"+u.getProyecto().getNombre()+" \n ");
-                    escritor.write("Marcajes de "+u.getUsername()+"\n");
-                    
-                    marcajesList = (ArrayList<Marcaje>) crudU.listarMarcajes(u.getId());
-                    if (marcajesList != null){
-                        for (int y = 0; y < marcajesList.size(); y++){
-                            String auxFecha = marcajesList.get(y).getFecha();
-                            if  (utilFecha.fechaMenorIgualFecha(desde, auxFecha, hasta)){
-                                 escritor.write(marcajesList.get(y).getTipo_marcaje()+" fecha: "+marcajesList.get(y).getFecha() + "\n");
+                    if (u.getEmpresa().getNombre_empresa().equals(e.getNombre_empresa())) {
+                        escritor.write("\n------------------------------------------------------------------------\n");
+                        escritor.write("\n");
+                        escritor.write("\n" + u.getUsername() + "\\" + u.getDni() + "\\" + u.getNombre() + "\\" + u.getApellidos() + "\\" + u.getFecha_alta() + "\\" + u.getFecha_baja() + "\\" + u.getProyecto().getNombre() + " \n ");
+                        escritor.write("Marcajes de " + u.getUsername() + "\n");
+
+                        marcajesList = (ArrayList<Marcaje>) crudU.listarMarcajes(u.getId());
+                        if (marcajesList != null) {
+                            for (int y = 0; y < marcajesList.size(); y++) {
+                                String auxFecha = marcajesList.get(y).getFecha();
+                                if (utilFecha.fechaMenorIgualFecha(desde, auxFecha, hasta)) {
+                                    escritor.write(marcajesList.get(y).getTipo_marcaje() + " fecha: " + marcajesList.get(y).getFecha() + "\n");
+                                }
                             }
                         }
                     }
-                    
-                    
+
                 }
                 escritor.close();
 
