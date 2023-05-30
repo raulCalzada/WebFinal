@@ -31,6 +31,7 @@ public class CRUDUsers {
     ResultSet aux;
     ResultSet rs2;
     ResultSet rs3;
+    private Log log;
     
     Project p = new Project();
     User u = new User();

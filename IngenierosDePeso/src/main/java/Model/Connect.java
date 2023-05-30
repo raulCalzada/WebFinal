@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Utils.Log;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class Connect {
     String url="jdbc:mysql://localhost:3306/"; //?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDateTimeCode=false&serverTimezone=UTC
     String driver= "com.mysql.cj.jdbc.Driver";
     Connection cx;
+    private Log log;
     
     public Connect (){
         
@@ -33,9 +35,11 @@ public class Connect {
             Class.forName(driver);
             cx = (Connection) DriverManager.getConnection(url+bd, user, password);
             System.out.print("SE CONECTÓ A LA BD "+bd);
+            Log.log.info("SE CONECTÓ A LA BD "+bd+"\n");
             
         } catch (ClassNotFoundException ex) {
             System.out.print("NO SE CONECTÓ A LA BD "+bd);
+            Log.log.info("NO SE CONECTÓ A LA BD "+bd+"\n");
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cx;
@@ -47,17 +51,5 @@ public class Connect {
         } catch (SQLException ex) {
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public static void main (String[] args) throws SQLException{
-        Connect connection = new Connect();
-        Connection cx = connection.conect();
-        
-        Statement state = cx.createStatement();
-        ResultSet rs = state.executeQuery("Select * from empresa");
-        while(rs.next()){
-            System.out.println(rs.getString(2));
-        }
-        cx.close();
     }
 }

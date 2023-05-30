@@ -25,7 +25,7 @@ public class CRUDEmpresas {
     ResultSet rs;
     ResultSet rs2;
     Empresa e = new Empresa();
-    
+    private Log log;
     
     public List listar() throws SQLException{
         ArrayList<Empresa> list = new ArrayList<>();
