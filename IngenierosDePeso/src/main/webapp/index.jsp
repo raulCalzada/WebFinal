@@ -14,7 +14,7 @@
 
     </head>
     <body class="back">
-        <form action="UserController">
+        <form action="UserController" method="post">
             <div class="header">
                 <div class="cuadrado">
                     <div class="container"><img class="image" src="Public/logo.jpg"></div>

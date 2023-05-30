@@ -232,11 +232,51 @@ public class UserController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        
+    
+        Log.log.info("Entramos en el UserController\n");
+        response.setContentType("text/html;charset=UTF-8");
+        String action = request.getParameter("action");
+        
+        if (action.equals("Login")){
+        //PARA EL LOGIN
+            String usname = request.getParameter("txtUsername");
+            String psw = request.getParameter("txtPassword");
+            user.setUsername(usname);
+            user.setPassword(psw);
+            Log.log.info("Intento de logueo de "+ usname +"\n");
+            
+            CRUDUsers uu = new CRUDUsers();
+           
+            if(v.Valid(user) == 1){
+                try {
+                    //si es usuario tipo "U"
+                    Log.log.info("El usuario es trabajador\n");
+                    String u = uu.getUserId(usname,psw);
+                    loginCookie = new Cookie("idUser",u);
+                    loginCookie.setMaxAge(30*60);
+                    response.addCookie(loginCookie);           
+                    request.getRequestDispatcher("/Views/PrincipalC.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else if(v.Valid(user) == 2){
+                try {
+                    //si es usuario tipo "A"
+                    Log.log.info("El usuario es de RRHH\n");
+                    String u = uu.getUserId(usname,psw);
+                    loginCookie = new Cookie("idUser",u);
+                    loginCookie.setMaxAge(30*60);
+                    response.addCookie(loginCookie);
+                    request.getRequestDispatcher("/Views/PrincipalRRHH.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }
         }
+            
     }
 
     /**
