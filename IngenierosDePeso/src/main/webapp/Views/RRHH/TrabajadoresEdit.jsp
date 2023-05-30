@@ -20,7 +20,7 @@
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edicion <%= u.getUsername()%></title>
-        <style>
+         <style>
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f5f5f5;
@@ -56,7 +56,8 @@
             }
 
             .form-container form input[type="text"],
-            .form-container form input[type="hidden"] {
+            .form-container form input[type="hidden"],
+            .form-container form input[type="datetime-local"] {
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
@@ -93,9 +94,9 @@
                     DNI<br><!-- comment -->
                     <input type="text" name="txtDni" value="<%= u.getDni() %>"> <br>
                     Fecha Alta<br><!-- comment -->
-                    <input type="text" name="txtFechaAlta" value="<%= u.getFecha_alta() %>"> <br>
+                    <input type="datetime-local" id="fecha" name="txtFechaAlta" class="form-control" value="<%= u.getFecha_alta() %>" step="1" required><br>
                     Fecha Baja<br><!-- comment -->
-                    <input type="text" name="txtFechaBaja" value="<%= u.getFecha_baja() %>"> <br>
+                    <input type="datetime-local" id="fecha" name="txtFechaBaja" class="form-control" value="<%= u.getFecha_baja() %>" step="1" required><br>
                     Proyecto<br><!--comment -->
                     <input type="text" name="txtProy" value="<%= u.getProyecto().getNombre() %>"> <br>
                     Empresa<br><!-- comment -->
