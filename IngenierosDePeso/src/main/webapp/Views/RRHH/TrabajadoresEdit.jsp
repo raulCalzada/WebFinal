@@ -117,7 +117,7 @@
                     Fecha Baja<br><!-- comment -->
                     <input type="datetime-local" id="fecha" name="txtFechaBaja" class="form-control" value="<%= u.getFecha_baja() %>" step="1" required><br>
                     Proyecto<br><!--comment -->
-                    <select type="text" name="txtProy">
+                    <select type="select" name="txtProy">
                         <option value="<%= u.getProyecto().getNombre() %>"><%= u.getProyecto().getNombre() %></option>
                         <%CRUDProjects crudP = new CRUDProjects();
                         List<Project> projectList = crudP.listar();
