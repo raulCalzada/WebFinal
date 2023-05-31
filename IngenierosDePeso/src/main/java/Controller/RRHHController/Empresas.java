@@ -11,10 +11,6 @@ import Utils.CRUDEmpresas;
 import Utils.CRUDUsers;
 import Utils.FormatoFecha;
 import Utils.Log;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Table;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -44,6 +40,7 @@ public class Empresas extends HttpServlet {
      */
     String listar = "/Views/RRHH/Empresas.jsp";
     String edit = "/Views/RRHH/EmpresasEdit.jsp";
+    String add = "/Views/RRHH/EmpresasAdd.jsp";
     String RRHH = "/Views/PrincipalRRHH.jsp";
     private Log log;
     private FormatoFecha utilFecha = new FormatoFecha();
@@ -83,18 +80,36 @@ public class Empresas extends HttpServlet {
             access = listar;
             RequestDispatcher view = request.getRequestDispatcher(access);
             view.forward(request, response);
+            
+            
         } else if (action.equalsIgnoreCase("menu")) {
             access = RRHH;
             RequestDispatcher view = request.getRequestDispatcher(access);
             view.forward(request, response);
-        } else if (action.equals("informe")) {
+            
+            
+        }else if (action.equals("add")){
+            access = add;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
+            
+            
+        }else if (action.equals("create")){
+            
+            CRUDEmpresas crudE = new CRUDEmpresas();
+            crudE.create(request.getParameter("txtNameEmpres"));
+            access = listar;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
+        
+        }else if (action.equals("informe")) {
             String desde = request.getParameter("txtFechaDesde");
             String hasta = request.getParameter("txtFechaHasta");
             Empresa e = new Empresa();
             CRUDEmpresas crudE = new CRUDEmpresas();
             CRUDUsers crudU = new CRUDUsers();
             ArrayList<User> userList = new ArrayList<>();
-
+            
             try {
                 e = crudE.list(request.getParameter("idEmpresa"));
 

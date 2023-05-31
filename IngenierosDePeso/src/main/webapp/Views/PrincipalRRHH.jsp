@@ -5,8 +5,26 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Utils.CRUDUsers" %>
+<%@page import="Model.User" %>
 <!DOCTYPE html>
 <html>
+    <%
+            CRUDUsers crudUsers= new CRUDUsers();
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
+            User u = (User)crudUsers.list(id);
+            %>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,6 +81,21 @@
             .button:hover {
                 background-color: #0056b3;
             }
+            .buttonred {
+                display: inline-block;
+                padding: 10px 20px;
+                margin: 10px;
+                background-color: red;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 4px;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+
+            .buttonred:hover {
+                background-color: #0056b3;
+            }
         </style>
     </head>
 
@@ -73,6 +106,7 @@
             <a href="Projects?action=listar" class="button" >Proyectos</a>
             <a href="Empresas?action=listar" class="button" >Empresas</a>
             <a href="Users?action=listar" class="button">Trabajadores</a>
+            <a href="UserController?action=logout&id=<%= u.getId()%>" class="buttonred">Salir</a>
         </div>
 
     </body>

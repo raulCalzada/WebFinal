@@ -68,9 +68,22 @@ public class CRUDEmpresas {
             ps= con.prepareStatement(sql);
             ps.executeUpdate(); 
             return true;
-        }catch (Exception i){
+        }catch (SQLException i){
         }
         
+        return false;
+        
+    }
+    //como para crear una empresa solo se requiere por parámetro un string, no le paso mas
+    public boolean create(String e){
+        try{
+            String sql = "INSERT INTO rrhh.empresa (id_empresa, nombre_empresa) SELECT COALESCE(MAX(id_empresa), 0) + 1, '"+e+"' FROM rrhh.empresa";
+            con = cn.conect();
+            ps= con.prepareStatement(sql);
+            ps.executeUpdate();
+            return true;
+        }catch (SQLException i){
+        }
         return false;
         
     }

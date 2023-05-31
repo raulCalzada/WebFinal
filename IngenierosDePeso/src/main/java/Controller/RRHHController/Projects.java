@@ -42,6 +42,7 @@ public class Projects extends HttpServlet {
      */
     String listar = "/Views/RRHH/Proyectos.jsp";
     String edit = "/Views/RRHH/ProyectosEdit.jsp";
+    String add = "/Views/RRHH/ProyectosAdd.jsp";
     String RRHH = "/Views/PrincipalRRHH.jsp";
     private Log log;
     private FormatoFecha utilFecha = new FormatoFecha();
@@ -69,6 +70,23 @@ public class Projects extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher(access);
             view.forward(request, response);
 
+        }else if (action.equals("add")){
+            access = add;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
+            
+            
+        }else if (action.equals("create")){
+            Project p = new Project();
+            CRUDProjects crudP = new CRUDProjects();
+            CRUDEmpresas crudE = new CRUDEmpresas();
+            p.setNombre(request.getParameter("txtNameProyect"));
+            p.setId_empresa(request.getParameter("txtEmpresaProyect"));
+            crudP.create(p);
+            access = listar;
+            RequestDispatcher view = request.getRequestDispatcher(access);
+            view.forward(request, response);
+        
         } else if (action.equalsIgnoreCase("update")) {
             Project p = new Project();
             CRUDProjects cpr = new CRUDProjects();

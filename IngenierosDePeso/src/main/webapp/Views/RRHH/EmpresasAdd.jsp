@@ -1,13 +1,13 @@
 <%-- 
-    Document   : ProyectosEdit
-    Created on : 10 may 2023, 12:45:16
+    Document   : EmpresasEdit
+    Created on : 10 may 2023, 12:45:39
     Author     : raulc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@page import="Utils.CRUDProjects" %>
-<%@page import="Model.Project" %>
+<%@page import="Utils.CRUDEmpresas" %>
+<%@page import="Model.Empresa" %>
 <%@page import="Utils.CRUDUsers" %>
 <%@page import="Model.User" %>
 <%@ page import="java.util.Iterator" %>
@@ -15,23 +15,23 @@
 <html>
     <%
             CRUDUsers crudUsers= new CRUDUsers();
-            String idu = null; // Declarar la variable y asignarle un valor predeterminado
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("idUser")) {
-                        idu = cookie.getValue();
+                        id = cookie.getValue();
                         break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
                     }
                 }
             }
 
    
-            User u = (User)crudUsers.list(idu);
+            User u = (User)crudUsers.list(id);
             %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Proyecto</title>
+        <title>JSP Page</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -78,7 +78,7 @@
             .form-container form button[type="submit"],
             .form-container form a {
                 display: inline-block;
-                background-color: #808080;
+                background-color: #DC143C;
                 color: #fff;
                 padding: 10px 20px;
                 border-radius: 5px;
@@ -91,24 +91,18 @@
         </style>
     </head>
     <body>
-        <%  CRUDProjects crudProjects = new CRUDProjects();
-            String id = (String) request.getAttribute("idproj");
-            Project project = (Project)crudProjects.list(id);
-        %>
         <div class="container">
             <div class="form-container">
-                <h1>Modificar proyecto</h1>
-                <form action="Projects">
-                    Nombre:<br><!-- comment -->
-                    <input type="text" name="txtNameProyect" value="<%= project.getNombre() %>"> <br>
-                    Empresa:<br><!-- comment -->
-                    <input type="text" name="txtEmpresaProyect" value="<%= project.getId_empresa() %>"> <br>
-                    <input type="hidden" name="txtId" value="<%= project.getId_proyecto() %>">
-                    <button type="submit" name="action" value="update">Guardar</button>
-                    <a href="Projects?action=listar">Volver</a>
+                <h1>Crear empresa</h1>
+                <form action="Empresas">
+                    Nombre de la Empresa:<br><!-- comment -->
+                    <input type="text" name="txtNameEmpres" value="" required> <br>
+                    <button type="submit" name="action" value="create">Crear Empresa</button>
+                    <a href="Empresas?action=listar">Volver</a>
                 </form>
             </div>
         </div>
     </body>
 </html>
+
 

@@ -10,15 +10,33 @@
 <%@page import="Model.Project" %>
 <%@page import="Model.User" %>
 <%@page import="Model.Marcaje" %>
+<%@page import="Utils.CRUDUsers" %>
+<%@page import="Model.User" %>
 <%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
+    <%
+            CRUDUsers crudUsers= new CRUDUsers();
+            String idu = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        idu = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
+            User ui = (User)crudUsers.list(idu);
+            %>
     <head>
         <title>Marcajes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <%  CRUDUsers crudUsers= new CRUDUsers();
+        <%  
             String id = (String) request.getAttribute("idUser");
             User u = (User)crudUsers.list(id);
         %>
@@ -36,7 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% crudUsers= new CRUDUsers();
+                            <%
                            List<Marcaje> marcList = crudUsers.listarMarcajes(id);
                            Iterator<Marcaje> itr = marcList.iterator();
                            while(itr.hasNext()) {

@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@page import="Utils.CRUDUsers" %>
-<%@page import="Utils.CRUDEmpresas" %>
 <%@page import="Utils.CRUDProjects" %>
 <%@page import="Model.Project" %>
 <%@page import="Model.User" %>
@@ -15,30 +14,26 @@
 <%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
-    <%
+    <head>
+<%
             CRUDUsers crudUsers= new CRUDUsers();
-            String idu = null; // Declarar la variable y asignarle un valor predeterminado
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("idUser")) {
-                        idu = cookie.getValue();
+                        id = cookie.getValue();
                         break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
                     }
                 }
             }
 
    
-            User e = (User)crudUsers.list(idu);
+            User e = (User)crudUsers.list(id);
             %>
-    <head>
-        <%
-            String id = (String) request.getAttribute("idUser");
-            User u = (User)crudUsers.list(id);
-        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edicion <%= u.getUsername()%></title>
-         <style>
+        <title>Crear Usuario</title>
+        <style>
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f5f5f5;
@@ -76,7 +71,8 @@
             .form-container form input[type="text"],
             .form-container form input[type="hidden"],
             .form-container form input[type="datetime-local"],
-            .form-container form input[type="select"]{
+            .form-container form input[type="password"],
+            .form-container form select{
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
@@ -96,41 +92,40 @@
             .form-container form button[type="submit"] {
                 margin-right: 10px;
             }
+
         </style>
     </head>
     <body>
-        
+
         <div class="container">
             <div class="form-container">
-                <h1>Modificar Usuario</h1>
+                <h1>Crear Usuario</h1>
                 <form action="Users">
                     UserName<br><!-- comment -->
-                    <input type="text" name="txtUsername" value="<%= u.getUsername() %>" required> <br>
+                    <input type="text" name="txtUsername"  required> <br>
+                    Password<br><!-- comment -->
+                    <input type="password" name="txtPassword"  required> <br>
                     Nombre<br><!-- comment -->
-                    <input type="text" name="txtNombre" value="<%= u.getNombre() %>" required> <br>
+                    <input type="text" name="txtNombre" required> <br>
                     Apellidos<br><!-- comment -->
-                    <input type="text" name="txtApellidos" value="<%= u.getApellidos() %>" required> <br>
+                    <input type="text" name="txtApellidos"  required> <br>
                     DNI<br><!-- comment -->
-                    <input type="text" name="txtDni" value="<%= u.getDni() %>" required> <br>
+                    <input type="text" name="txtDni" required> <br>
                     Fecha Alta<br><!-- comment -->
-                    <input type="datetime-local" id="fecha" name="txtFechaAlta" class="form-control" value="<%= u.getFecha_alta() %>" step="1" required><br>
+                    <input type="datetime-local" id="fecha" name="txtFechaAlta" class="form-control"  step="1" required><br>
                     Fecha Baja<br><!-- comment -->
-                    <input type="datetime-local" id="fecha" name="txtFechaBaja" class="form-control" value="<%= u.getFecha_baja() %>" step="1" required><br>
+                    <input type="datetime-local" id="fecha" name="txtFechaBaja" class="form-control"  step="1" required><br>
                     Proyecto<br><!--comment -->
-                    <select type="select" name="txtProy">
-                        <option value="<%= u.getProyecto().getNombre() %>"><%= u.getProyecto().getNombre() %></option>
+                    <select name="txtProy">
                         <%CRUDProjects crudP = new CRUDProjects();
                         List<Project> projectList = crudP.listar();
                            for (Project p : projectList) {
                         %>
-                        <option value="<%= p.getNombre() %>"> <%= p.getNombre() %></option>
+                        <option value="<%= p.getId_proyecto()%>"> <%= p.getNombre() %></option>
                         <% } %>
                     </select><br>
-                    Empresa (readonly)<br><!-- comment -->
-                    <input type="text" value="<%= u.getEmpresa().getNombre_empresa() %>" readonly> <br>
-                    <input type="hidden" name="txtId" value="<%= u.getId() %>">
-                    <input type="hidden" name="txtTipo" value="<%= u.getTipo() %>">
-                    <button type="submit" name="action" value="updateUser">Guardar</button>
+
+                    <button type="submit" name="action" value="create">Guardar</button>
                     <a href="Users?action=listar">Volver</a>
                 </form>
             </div>

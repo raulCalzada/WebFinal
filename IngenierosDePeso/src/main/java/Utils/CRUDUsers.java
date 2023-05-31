@@ -126,6 +126,31 @@ public class CRUDUsers {
         }
         
     }
+    public boolean create(User u, String projectId) {
+        try{
+            //rrhh.usuarios
+            String sql = "INSERT INTO rrhh.usuarios (id_user, username, password, dni, nombre, apellidos, fecha_alta, fecha_baja, tipo_usuario)\n" +
+            "SELECT MAX(id_user) + 1, '"+u.getUsername()+"', '"+u.getPassword()+"', '"+u.getDni()+"', '"+u.getNombre()+"', '"+u.getApellidos()+"', '"+u.getFecha_alta()+"', '"+u.getFecha_baja()+"', 'U'\n" +
+            "FROM rrhh.usuarios";
+            con = cn.conect();
+            ps= con.prepareStatement(sql);
+            ps.executeUpdate();
+
+            String idUser = getUserId(u.getUsername(),u.getPassword());
+            
+            //rrhh.usuarios_proyectos
+            sql = "INSERT INTO rrhh.usuarios_proyectos (id, id_user, id_proyecto, fecha_alta, fecha_baja)\n" +
+            "SELECT MAX(id) + 1, "+idUser+", "+projectId+", '"+u.getFecha_alta()+"', '"+u.getFecha_baja()+"' FROM rrhh.usuarios_proyectos";
+            con = cn.conect();
+            ps= con.prepareStatement(sql);
+            ps.executeUpdate();
+            
+            return true;
+        }catch (SQLException e){
+        }
+        return false;
+    }
+    
     
     public User list(String id) throws SQLException{
         String sql = "SELECT * FROM rrhh.usuarios where id_user="+id;

@@ -7,9 +7,27 @@
 <%@ page import="java.util.List" %>
 <%@page import="Utils.CRUDEmpresas" %>
 <%@page import="Model.Empresa" %>
+<%@page import="Utils.CRUDUsers" %>
+<%@page import="Model.User" %>
 <%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
+    <%
+            CRUDUsers crudUsers= new CRUDUsers();
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
+            User u = (User)crudUsers.list(id);
+            %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Empresas RRHH</title>
@@ -136,6 +154,7 @@
                     </tbody>
                 </table>
                 <div class="button-container">
+                    <a href="Empresas?action=add">Añadir Empresa</a>
                     <a href="Empresas?action=menu">Volver al Menú</a>
                 </div>
             </div>

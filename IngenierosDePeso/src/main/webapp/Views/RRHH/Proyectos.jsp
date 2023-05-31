@@ -8,10 +8,30 @@
 <%@ page import="java.util.List" %>
 <%@page import="Utils.CRUDProjects" %>
 <%@page import="Model.Project" %>
+<%@page import="Utils.CRUDEmpresas" %>
+<%@page import="Model.Empresa" %>
+<%@page import="Utils.CRUDUsers" %>
+<%@page import="Model.User" %>
 <%@ page import="java.util.Iterator" %>
 
 <!DOCTYPE html>
 <html>
+    <%
+            CRUDUsers crudUsers= new CRUDUsers();
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
+            User u = (User)crudUsers.list(id);
+            %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Proyectos RRHH</title>
@@ -127,6 +147,8 @@
                     </thead>
                     <tbody>
                         <% CRUDProjects crudProjects = new CRUDProjects();
+                           CRUDEmpresas crudEmpresas = new CRUDEmpresas();
+                           Empresa e = new Empresa();
                            List<Project> projectList = crudProjects.listar();
                            Iterator<Project> itr = projectList.iterator();
                            while(itr.hasNext()) {
@@ -135,7 +157,10 @@
                         <tr>
                             <td><%= project.getId_proyecto() %></td>
                             <td><%= project.getNombre() %></td>
-                            <td><%= project.getId_empresa() %></td>
+                            <%
+                                e = crudEmpresas.list(project.getId_empresa());
+                            %>
+                            <td><%= e.getNombre_empresa() %></td>
                             <!-- Para editar tomamos el valor ID_proyecto que se lo vamos a pasar al controlador -->
                             <td>
                                 <a href="Projects?action=edit&id=<%= project.getId_proyecto()%>"> Editar </a>
@@ -147,6 +172,7 @@
                 </table>
 
                 <div class="button-container">
+                    <a href="Projects?action=add">Añadir Proyecto</a>
                     <a href="Projects?action=menu">Volver al Menú</a>
                 </div>
             </div>

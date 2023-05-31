@@ -7,8 +7,8 @@ package Controller.RRHHController;
 
 import Model.Project;
 import Model.User;
-import Utils.CRUDProjects;
 import Utils.CRUDUsers;
+import Utils.FormatoFecha;
 import Utils.Log;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +37,7 @@ public class Users extends HttpServlet {
      */
     String listar="/Views/RRHH/Trabajadores.jsp";
     String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
+    String add="/Views/RRHH/TrabajadoresAdd.jsp";
     String listarMarcaje = "/Views/RRHH/Marcajes.jsp";
     String RRHH= "/Views/PrincipalRRHH.jsp";
     private Log log;
@@ -66,6 +66,43 @@ public class Users extends HttpServlet {
         }else if(action.equalsIgnoreCase("editUser")){
             request.setAttribute("idUser", request.getParameter("id"));
             access = edit;
+        }else if (action.equals("add")){
+            access = add;
+            
+            
+        }else if (action.equals("create")){
+            Project p = new Project();
+            User u = new User();
+            CRUDUsers crudU = new CRUDUsers();
+            
+            String id = request.getParameter("txtId");
+            String username = request.getParameter("txtUsername");
+            String password = request.getParameter("txtPassword");
+            String name = request.getParameter("txtNombre");
+            String surname = request.getParameter("txtApellidos");
+            String dni = request.getParameter("txtDni");
+            String fecha_alta = request.getParameter("txtFechaAlta");
+            String fecha_baja = request.getParameter("txtFechaBaja");
+            String proyecto = request.getParameter("txtProy");
+            String tipo = request.getParameter("txtTipo");
+            FormatoFecha f = new FormatoFecha();
+            String alta = f.formatearFechaSeg(fecha_alta);
+            String baja = f.formatearFechaSeg(fecha_baja);
+            
+            u.setId(id);
+            u.setUsername(username);
+            u.setPassword(password);
+            u.setNombre(name);
+            u.setApellidos(surname);
+            u.setDni(dni);
+            u.setFecha_baja(baja);
+            u.setFecha_alta(alta);
+            u.setTipo(tipo);
+            
+            crudU.create(u,proyecto);
+            
+            access = listar;
+        
         }else if (action.equalsIgnoreCase("updateUser")){
             User u = new User();
             CRUDUsers cu = new CRUDUsers();
@@ -80,14 +117,17 @@ public class Users extends HttpServlet {
             String fecha_baja = request.getParameter("txtFechaBaja");
             String proyecto = request.getParameter("txtProy");
             String tipo = request.getParameter("txtTipo");
+            FormatoFecha f = new FormatoFecha();
+            String alta = f.formatearFechaSeg(fecha_alta);
+            String baja = f.formatearFechaSeg(fecha_baja);
             
             u.setId(id);
             u.setUsername(username);
             u.setNombre(name);
             u.setApellidos(surname);
             u.setDni(dni);
-            u.setFecha_baja(fecha_baja);
-            u.setFecha_alta(fecha_alta);
+            u.setFecha_baja(baja);
+            u.setFecha_alta(alta);
             p.setNombre(proyecto);
             u.setProyecto(p);
             u.setTipo(tipo);
