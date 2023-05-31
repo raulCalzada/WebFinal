@@ -15,19 +15,19 @@
 <html>
     <%
             CRUDUsers crudUsers= new CRUDUsers();
-            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            String idu = null; // Declarar la variable y asignarle un valor predeterminado
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("idUser")) {
-                        id = cookie.getValue();
+                        idu = cookie.getValue();
                         break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
                     }
                 }
             }
 
    
-            User u = (User)crudUsers.list(id);
+            User u = (User)crudUsers.list(idu);
             %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -17,19 +17,19 @@
 <html>
     <%
             CRUDUsers crudUsers= new CRUDUsers();
-            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            String idu = null; // Declarar la variable y asignarle un valor predeterminado
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("idUser")) {
-                        id = cookie.getValue();
+                        idu = cookie.getValue();
                         break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
                     }
                 }
             }
 
    
-            User e = (User)crudUsers.list(id);
+            User e = (User)crudUsers.list(idu);
             %>
     <head>
         <%
@@ -75,7 +75,8 @@
 
             .form-container form input[type="text"],
             .form-container form input[type="hidden"],
-            .form-container form input[type="datetime-local"] {
+            .form-container form input[type="datetime-local"],
+            .form-container form input[type="select"]{
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
@@ -116,7 +117,15 @@
                     Fecha Baja<br><!-- comment -->
                     <input type="datetime-local" id="fecha" name="txtFechaBaja" class="form-control" value="<%= u.getFecha_baja() %>" step="1" required><br>
                     Proyecto<br><!--comment -->
-                    <input type="text" name="txtProy" value="<%= u.getProyecto().getNombre() %>"> <br>
+                    <select type="text" name="txtProy">
+                        <option value="<%= u.getProyecto().getNombre() %>"><%= u.getProyecto().getNombre() %></option>
+                        <%CRUDProjects crudP = new CRUDProjects();
+                        List<Project> projectList = crudP.listar();
+                           for (Project p : projectList) {
+                        %>
+                        <option value="<%= p.getNombre() %>"> <%= p.getNombre() %></option>
+                        <% } %>
+                    </select><br>
                     Empresa (readonly)<br><!-- comment -->
                     <input type="text" value="<%= u.getEmpresa().getNombre_empresa() %>" readonly> <br>
                     <input type="hidden" name="txtId" value="<%= u.getId() %>">
