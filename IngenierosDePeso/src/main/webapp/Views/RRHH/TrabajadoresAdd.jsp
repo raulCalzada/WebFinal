@@ -1,37 +1,38 @@
 <%-- 
-    Document   : ProyectosEdit
-    Created on : 10 may 2023, 12:45:16
+    Document   : TrabajadoresEdit
+    Created on : 10 may 2023, 12:45:26
     Author     : raulc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
+<%@page import="Utils.CRUDUsers" %>
 <%@page import="Utils.CRUDProjects" %>
 <%@page import="Model.Project" %>
-<%@page import="Utils.CRUDUsers" %>
 <%@page import="Model.User" %>
+<%@page import="Model.Empresa" %>
 <%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
-    <%
+    <head>
+<%
             CRUDUsers crudUsers= new CRUDUsers();
-            String idu = null; // Declarar la variable y asignarle un valor predeterminado
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("idUser")) {
-                        idu = cookie.getValue();
+                        id = cookie.getValue();
                         break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
                     }
                 }
             }
 
    
-            User u = (User)crudUsers.list(idu);
+            User e = (User)crudUsers.list(id);
             %>
-    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Crear Usuario</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -68,7 +69,10 @@
             }
 
             .form-container form input[type="text"],
-            .form-container form input[type="hidden"] {
+            .form-container form input[type="hidden"],
+            .form-container form input[type="datetime-local"],
+            .form-container form input[type="password"],
+            .form-container form select{
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
@@ -78,7 +82,7 @@
             .form-container form button[type="submit"],
             .form-container form a {
                 display: inline-block;
-                background-color: #808080;
+                background-color: #006400;
                 color: #fff;
                 padding: 10px 20px;
                 border-radius: 5px;
@@ -88,27 +92,44 @@
             .form-container form button[type="submit"] {
                 margin-right: 10px;
             }
+
         </style>
     </head>
     <body>
-        <%  CRUDProjects crudProjects = new CRUDProjects();
-            String id = (String) request.getAttribute("idproj");
-            Project project = (Project)crudProjects.list(id);
-        %>
+
         <div class="container">
             <div class="form-container">
-                <h1>Modificar proyecto</h1>
-                <form action="Projects">
-                    Nombre:<br><!-- comment -->
-                    <input type="text" name="txtNameProyect" value="<%= project.getNombre() %>"> <br>
-                    Empresa:<br><!-- comment -->
-                    <input type="text" name="txtEmpresaProyect" value="<%= project.getId_empresa() %>"> <br>
-                    <input type="hidden" name="txtId" value="<%= project.getId_proyecto() %>">
-                    <button type="submit" name="action" value="update">Guardar</button>
-                    <a href="Projects?action=listar">Volver</a>
+                <h1>Crear Usuario</h1>
+                <form action="Users">
+                    UserName<br><!-- comment -->
+                    <input type="text" name="txtUsername"  required> <br>
+                    Password<br><!-- comment -->
+                    <input type="password" name="txtPassword"  required> <br>
+                    Nombre<br><!-- comment -->
+                    <input type="text" name="txtNombre" required> <br>
+                    Apellidos<br><!-- comment -->
+                    <input type="text" name="txtApellidos"  required> <br>
+                    DNI<br><!-- comment -->
+                    <input type="text" name="txtDni" required> <br>
+                    Fecha Alta<br><!-- comment -->
+                    <input type="datetime-local" id="fecha" name="txtFechaAlta" class="form-control"  step="1" required><br>
+                    Fecha Baja<br><!-- comment -->
+                    <input type="datetime-local" id="fecha" name="txtFechaBaja" class="form-control"  step="1" required><br>
+                    Proyecto<br><!--comment -->
+                    <select name="txtProy">
+                        <%CRUDProjects crudP = new CRUDProjects();
+                        List<Project> projectList = crudP.listar();
+                           for (Project p : projectList) {
+                        %>
+                        <option value="<%= p.getId_proyecto()%>"> <%= p.getNombre() %></option>
+                        <% } %>
+                    </select><br>
+
+                    <button type="submit" name="action" value="create">Guardar</button>
+                    <a href="Users?action=listar">Volver</a>
                 </form>
             </div>
         </div>
+
     </body>
 </html>
-

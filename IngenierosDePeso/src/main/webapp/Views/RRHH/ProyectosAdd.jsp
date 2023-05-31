@@ -8,6 +8,8 @@
 <%@ page import="java.util.List" %>
 <%@page import="Utils.CRUDProjects" %>
 <%@page import="Model.Project" %>
+<%@page import="Utils.CRUDEmpresas" %>
+<%@page import="Model.Empresa" %>
 <%@page import="Utils.CRUDUsers" %>
 <%@page import="Model.User" %>
 <%@ page import="java.util.Iterator" %>
@@ -15,23 +17,23 @@
 <html>
     <%
             CRUDUsers crudUsers= new CRUDUsers();
-            String idu = null; // Declarar la variable y asignarle un valor predeterminado
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("idUser")) {
-                        idu = cookie.getValue();
+                        id = cookie.getValue();
                         break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
                     }
                 }
             }
 
    
-            User u = (User)crudUsers.list(idu);
+            User u = (User)crudUsers.list(id);
             %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Añadir Proyecto</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -88,23 +90,32 @@
             .form-container form button[type="submit"] {
                 margin-right: 10px;
             }
+            .form-container form select {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                box-sizing: border-box;
+            }
         </style>
     </head>
     <body>
-        <%  CRUDProjects crudProjects = new CRUDProjects();
-            String id = (String) request.getAttribute("idproj");
-            Project project = (Project)crudProjects.list(id);
-        %>
         <div class="container">
             <div class="form-container">
                 <h1>Modificar proyecto</h1>
                 <form action="Projects">
                     Nombre:<br><!-- comment -->
-                    <input type="text" name="txtNameProyect" value="<%= project.getNombre() %>"> <br>
-                    Empresa:<br><!-- comment -->
-                    <input type="text" name="txtEmpresaProyect" value="<%= project.getId_empresa() %>"> <br>
-                    <input type="hidden" name="txtId" value="<%= project.getId_proyecto() %>">
-                    <button type="submit" name="action" value="update">Guardar</button>
+                    <input type="text" name="txtNameProyect" value=""> <br>
+                    Empresa correspondiente al proyecto:<br><!-- comment -->
+                    <select name="txtEmpresaProyect" required>
+                        <%CRUDEmpresas crudE = new CRUDEmpresas();
+                        List<Empresa> empresaList = crudE.listar();
+                           for (Empresa e : empresaList) {
+                        %>
+                        <option value="<%= e.getId_empresa() %>"><%= e.getNombre_empresa() %></option>
+                        <% } %>
+
+                    </select> <br>
+                    <button type="submit" name="action" value="create">Guardar</button>
                     <a href="Projects?action=listar">Volver</a>
                 </form>
             </div>

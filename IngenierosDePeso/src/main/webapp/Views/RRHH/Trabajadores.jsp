@@ -12,6 +12,22 @@
 <%@page import="Model.Empresa" %>
 <%@ page import="java.util.Iterator" %>
 <html>
+    <%
+            CRUDUsers crudUsers= new CRUDUsers();
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
+            User e= (User)crudUsers.list(id);
+            %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Usuarios RRHH</title>
@@ -104,7 +120,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% CRUDUsers crudUsers= new CRUDUsers();
+                        <% 
                            List<User> userList = crudUsers.listar();
                            Iterator<User> itr = userList.iterator();
                            while(itr.hasNext()) {
@@ -130,6 +146,7 @@
 
                 </table>
                 <div class="button-container">
+                    <a href="Users?action=add">Añadir Usuario</a>
                     <a href="Users?action=menu">Volver al Menú</a>
                 </div>
 

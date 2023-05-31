@@ -7,14 +7,32 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@page import="Utils.CRUDUsers" %>
+<%@page import="Utils.CRUDEmpresas" %>
+<%@page import="Utils.CRUDProjects" %>
 <%@page import="Model.Project" %>
 <%@page import="Model.User" %>
 <%@page import="Model.Empresa" %>
 <%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
+    <%
+            CRUDUsers crudUsers= new CRUDUsers();
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
+            User e = (User)crudUsers.list(id);
+            %>
     <head>
-        <%  CRUDUsers crudUsers= new CRUDUsers();
+        <%
             String id = (String) request.getAttribute("idUser");
             User u = (User)crudUsers.list(id);
         %>
@@ -86,20 +104,20 @@
                 <h1>Modificar Usuario</h1>
                 <form action="Users">
                     UserName<br><!-- comment -->
-                    <input type="text" name="txtUsername" value="<%= u.getUsername() %>"> <br>
+                    <input type="text" name="txtUsername" value="<%= u.getUsername() %>" required> <br>
                     Nombre<br><!-- comment -->
-                    <input type="text" name="txtNombre" value="<%= u.getNombre() %>"> <br>
+                    <input type="text" name="txtNombre" value="<%= u.getNombre() %>" required> <br>
                     Apellidos<br><!-- comment -->
-                    <input type="text" name="txtApellidos" value="<%= u.getApellidos() %>"> <br>
+                    <input type="text" name="txtApellidos" value="<%= u.getApellidos() %>" required> <br>
                     DNI<br><!-- comment -->
-                    <input type="text" name="txtDni" value="<%= u.getDni() %>"> <br>
+                    <input type="text" name="txtDni" value="<%= u.getDni() %>" required> <br>
                     Fecha Alta<br><!-- comment -->
                     <input type="datetime-local" id="fecha" name="txtFechaAlta" class="form-control" value="<%= u.getFecha_alta() %>" step="1" required><br>
                     Fecha Baja<br><!-- comment -->
                     <input type="datetime-local" id="fecha" name="txtFechaBaja" class="form-control" value="<%= u.getFecha_baja() %>" step="1" required><br>
                     Proyecto<br><!--comment -->
                     <input type="text" name="txtProy" value="<%= u.getProyecto().getNombre() %>"> <br>
-                    Empresa<br><!-- comment -->
+                    Empresa (readonly)<br><!-- comment -->
                     <input type="text" value="<%= u.getEmpresa().getNombre_empresa() %>" readonly> <br>
                     <input type="hidden" name="txtId" value="<%= u.getId() %>">
                     <input type="hidden" name="txtTipo" value="<%= u.getTipo() %>">

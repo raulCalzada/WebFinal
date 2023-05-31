@@ -10,9 +10,27 @@
 <%@page import="Model.Project" %>
 <%@page import="Model.User" %>
 <%@page import="Model.Marcaje" %>
+<%@page import="Utils.CRUDUsers" %>
+<%@page import="Model.User" %>
 <%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
+    <%
+            CRUDUsers crudUsers= new CRUDUsers();
+            String id = null; // Declarar la variable y asignarle un valor predeterminado
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idUser")) {
+                        id = cookie.getValue();
+                        break; // Si se encuentra la cookie, se asigna el valor y se sale del bucle
+                    }
+                }
+            }
+
+   
+            User u = (User)crudUsers.list(id);
+            %>
     <head>
         <title>Marcajes</title>
         <meta charset="UTF-8">

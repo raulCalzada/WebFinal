@@ -75,9 +75,7 @@ public class CRUDProjects{
         }
         return p;
     }
-    public boolean add(Project p){
-        throw new UnsupportedOperationException("");
-    }
+   
     public boolean edit(Project p){
         try{
             String sql = "update rrhh.proyectos set nombre='" +p.getNombre()+"', id_empresa='"+p.getId_empresa() +"' where id_proyecto='"+p.getId_proyecto()+"'";
@@ -92,8 +90,20 @@ public class CRUDProjects{
         return false;
         
     }
-    public boolean eliminar(int id){
-        throw new UnsupportedOperationException("");
+    
+    public boolean create(Project p){
+       
+        try{
+            String nombre = p.getNombre();
+            String sql = "INSERT INTO rrhh.proyectos (id_proyecto, nombre, id_empresa) SELECT MAX(id_proyecto) + 1, '"+p.getNombre()+"', "+p.getId_empresa()+" FROM rrhh.proyectos";
+            con = cn.conect();
+            ps= con.prepareStatement(sql);
+            ps.executeUpdate(); 
+            return true;
+        }catch (Exception e){
+        }
+        return false;
+        
     }
     
 }
