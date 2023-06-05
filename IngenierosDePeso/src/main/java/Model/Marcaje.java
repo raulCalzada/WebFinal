@@ -5,9 +5,14 @@
 package Model;
 
 /**
+ * Clase que representa el marcaje de un usuario.
+ * Esta clase encapsula los datos y atributos relacionados con el marcaje de un usuario, como la fecha y hora del marcaje, el tipo de marcaje (entrada o salida), etc.
+ * Proporciona métodos para acceder y modificar los datos del marcaje, así como para realizar operaciones relacionadas con el mismo.
+ * Esta clase se utiliza para gestionar la información y las acciones relacionadas con los marcajes de los usuarios dentro de una aplicación o sistema.
  *
  * @author raulc
  */
+
 public class Marcaje {
     private String id_marcaje;
     private String fecha;

@@ -5,9 +5,14 @@
 package Model;
 
 /**
+ * Clase que representa un proyecto.
+ * Esta clase encapsula los datos y atributos relacionados con un proyecto, como su nombre, descripción, fecha de inicio, fecha de finalización, etc.
+ * Proporciona métodos para acceder y modificar los datos del proyecto, así como para realizar operaciones relacionadas con el mismo.
+ * Esta clase se utiliza para instanciar y gestionar proyectos dentro de una aplicación o sistema.
  *
  * @author raulc
  */
+
 public class Project {
     private String id_proyecto;
     private String nombre;

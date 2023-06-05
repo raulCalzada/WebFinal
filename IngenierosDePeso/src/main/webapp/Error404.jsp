@@ -1,8 +1,11 @@
+<%-- 
+    Document   : Error 404
+    Created on : 5 jun 2023, 23:08:55
+    Author     : raulc
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
         <title>404</title>

@@ -5,9 +5,14 @@
 package Model;
 
 /**
+ * Clase que representa una empresa con todos sus parámetros.
+ * Esta clase encapsula los datos y atributos de una empresa, como su nombre, dirección, número de teléfono, etc.
+ * Proporciona métodos para acceder y modificar los parámetros de la empresa, así como para realizar operaciones relacionadas con la misma.
+ * Esta clase se utiliza para gestionar la información y las acciones relacionadas con una empresa dentro de una aplicación o sistema.
  *
  * @author raulc
  */
+
 public class Empresa {
     private String id_empresa;
     private String nombre_empresa;
