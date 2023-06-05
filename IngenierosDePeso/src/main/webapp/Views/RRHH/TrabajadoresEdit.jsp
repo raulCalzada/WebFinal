@@ -30,7 +30,7 @@
 
    
             User e = (User)crudUsers.list(idu);
-            %>
+    %>
     <head>
         <%
             String id = (String) request.getAttribute("idUser");
@@ -38,7 +38,7 @@
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edicion <%= u.getUsername()%></title>
-         <style>
+        <style>
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f5f5f5;
@@ -76,12 +76,13 @@
             .form-container form input[type="text"],
             .form-container form input[type="hidden"],
             .form-container form input[type="datetime-local"],
-            .form-container form input[type="select"]{
+            .form-container form select{
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
                 box-sizing: border-box;
             }
+
 
             .form-container form button[type="submit"],
             .form-container form a {
@@ -99,7 +100,7 @@
         </style>
     </head>
     <body>
-        
+
         <div class="container">
             <div class="form-container">
                 <h1>Modificar Usuario</h1>
