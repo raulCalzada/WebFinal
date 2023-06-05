@@ -5,9 +5,15 @@
 package Model;
 
 /**
+ * Clase que representa a un usuario.
+ * Esta clase encapsula los datos y atributos relacionados con un usuario, como su nombre, apellido, dirección de correo electrónico, etc.
+ * Además, tiene propiedades para las instancias de las clases "Empresa" y "Proyecto" asociadas al usuario.
+ * Proporciona métodos para acceder y modificar los datos del usuario, así como para realizar operaciones relacionadas con las empresas y proyectos asociados.
+ * Esta clase se utiliza para gestionar la información y acciones relacionadas con los usuarios en una aplicación o sistema.
  *
  * @author raulc
  */
+
 public class User {
     String tipo;
     String id;

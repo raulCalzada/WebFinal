@@ -21,27 +21,37 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase servlet para gestionar las acciones relacionadas con los usuarios en el módulo de RRHH.
+ * Proporciona métodos para crear, modificar y eliminar usuarios, así como para autenticar y autorizar el acceso de los mismos.
+ * Esta clase interactúa con la capa de datos para acceder a la base de datos de usuarios y realizar operaciones relacionadas.
+ * Además, se encarga de manejar las solicitudes HTTP relacionadas con los usuarios, como registrar nuevos usuarios, iniciar sesión o procesar formularios de modificación de datos.
+ * Esta clase forma parte del controlador de RRHH y se utiliza en conjunto con otras clases y componentes para implementar la funcionalidad completa del módulo.
  *
  * @author raulc
- */
+ **/
+
 public class Users extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     String listar="/Views/RRHH/Trabajadores.jsp";
     String edit= "/Views/RRHH/TrabajadoresEdit.jsp";
     String add="/Views/RRHH/TrabajadoresAdd.jsp";
     String listarMarcaje = "/Views/RRHH/Marcajes.jsp";
     String RRHH= "/Views/PrincipalRRHH.jsp";
     private Log log;
-    
+     /**
+     * Funcionamiento similar al de UserController con los ifs
+     * action para ver el listado de usuarios
+     * edit para ir a la pagina de edición
+     * update para editar el usuario
+     * menu para volver al menu
+     * add = para ir a la vista de añadir nuevo usuario
+     * create = para crear un usuario
+     * 
+
+     * @throws ServletException if a servlet-specific error occurs exception for bbdd
+     * @throws IOException if an I/O error occurs exception for bbdd
+     **/
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         

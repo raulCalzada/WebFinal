@@ -15,9 +15,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase para validar los logins de usuarios.
+ * Esta clase se encarga de recibir los datos de usuario y validarlos, incluyendo la autenticación mediante cookies y la consulta de información en la base de datos.
+ * Proporciona métodos para verificar la validez de un login, autenticar al usuario y obtener datos relacionados con el usuario autenticado.
  *
  * @author raulc
  */
+
 public class Validate {
     Connect cn = new Connect();
     PreparedStatement ps;
@@ -25,6 +29,11 @@ public class Validate {
     int r = 0;
     private Log log;
     
+    /**
+     * Esta clase recibe un usuario y valida diciendo que tipo de usuario es para el login
+     * @param user
+     * @return número que va a ser recogido indicando el tipo de usuario que es
+     */
     public int Valid(User user){
         String sql = "SELECT username,password,tipo_usuario FROM rrhh.usuarios  ";
         ArrayList<String> usernames = new ArrayList<String>();

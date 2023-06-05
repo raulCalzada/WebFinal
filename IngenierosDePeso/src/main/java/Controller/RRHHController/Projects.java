@@ -26,20 +26,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase servlet para gestionar las acciones relacionadas con los proyectos en el módulo de RRHH.
+ * Proporciona métodos para crear, modificar y eliminar proyectos, así como para asignar y gestionar recursos humanos en los mismos.
+ * Esta clase interactúa con la capa de datos para acceder a la base de datos de proyectos y realizar operaciones relacionadas.
+ * Además, se encarga de manejar las solicitudes HTTP relacionadas con los proyectos, como mostrar la lista de proyectos, asignar empleados a proyectos o procesar formularios de creación/modificación.
+ * Esta clase forma parte del controlador de RRHH y se utiliza en conjunto con otras clases y componentes para implementar la funcionalidad completa del módulo.
  *
  * @author raulc
- */
+ **/
+
 public class Projects extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     String listar = "/Views/RRHH/Proyectos.jsp";
     String edit = "/Views/RRHH/ProyectosEdit.jsp";
     String add = "/Views/RRHH/ProyectosAdd.jsp";

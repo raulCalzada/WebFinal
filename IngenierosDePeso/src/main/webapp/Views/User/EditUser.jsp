@@ -77,7 +77,7 @@
   </head>
   <body>
       <%  CRUDUsers crudUsers= new CRUDUsers();
-            String id;
+            String id = "idNoEncontrada";
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
@@ -114,19 +114,19 @@
           <td><input type="text" id="nombre" name="txtApellidos" value="<%= u.getApellidos() %>"></td>
         </tr>
         <tr>
-          <td>Fecha de Alta:</td>
+          <td>Fecha de Alta(readonly):</td>
           <td><input type="text" id="nombre" name="txtFechaAlta" value="<%= u.getFecha_alta() %>" readonly=""></td>
         </tr>
         <tr>
-          <td>Fecha de Baja:</td>
+          <td>Fecha de Baja(readonly):</td>
           <td><input type="text" id="nombre" name="txtFechaBaja" value="<%= u.getFecha_baja() %>" readonly=""></td>
         </tr>
         <tr>
-          <td>Empresa:</td>
+          <td>Empresa(readonly):</td>
           <td><input type="text" id="nombre" name="txtEmpresa" value="<%= u.getEmpresa().getNombre_empresa() %>" readonly=""></td>
         </tr>
         <tr>
-          <td>Proyecto:</td>
+          <td>Proyecto(readonly):</td>
           <td><input type="text" id="nombre" name="txtProy" value="<%= u.getProyecto().getNombre() %>" readonly=""></td> 
         </tr>
         <input type="hidden" name="txtTipo" value="U">

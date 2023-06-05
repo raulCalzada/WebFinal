@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Clase hecha principalmente para proporcionar utilidades generales, como listados de una clase llamando directamente a la base de datos.
+ * Esta clase se utiliza para centralizar y organizar funciones y métodos de uso común en el acceso a la base de datos.
+ * Proporciona métodos para realizar operaciones de consulta, inserción, actualización y eliminación en la base de datos.
+ * También puede incluir métodos para realizar cálculos o manipulaciones de datos específicos relacionados con la base de datos.
  *
  * @author raulc
  */
@@ -36,6 +40,12 @@ public class CRUDUsers {
     Project p = new Project();
     User u = new User();
     Empresa e = new Empresa();
+    
+    /**
+     * Funcion para listar todos los elementos de la clase correspondiente en la bbdd
+     * @return lista de la clase correspondiente
+     * @throws SQLException 
+     */
     
     public List listar() throws SQLException{
         ArrayList<User> list = new ArrayList<>();
@@ -100,7 +110,12 @@ public class CRUDUsers {
         return list;
     }
     
-
+    /**
+     * Para editar la clase correspondiente en la bbdd
+     * @param u que es el usuario editado
+     * @param projectName para indicar el proyecto elegido (es su id)
+     * @throws SQLException 
+     */
     public void edit(User u, String projectName) throws SQLException {
         
         

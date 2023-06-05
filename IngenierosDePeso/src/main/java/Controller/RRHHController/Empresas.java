@@ -23,21 +23,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.IOException;
 
-/**
- *
- * @author raulc
- */
+    /**
+      Funcionamiento similar al de UserController con los ifs
+      action para ver el listado de empresas
+      edit para ir a la pagina de edición
+      update para editar la empresa
+      menu para volver al menu
+      add = para ir a la vista de añadir nueva empresa
+      create = para crear una empresa
+      informe = peticion para generar informe
+     **/
 public class Empresas extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     String listar = "/Views/RRHH/Empresas.jsp";
     String edit = "/Views/RRHH/EmpresasEdit.jsp";
     String add = "/Views/RRHH/EmpresasAdd.jsp";
@@ -80,36 +78,33 @@ public class Empresas extends HttpServlet {
             access = listar;
             RequestDispatcher view = request.getRequestDispatcher(access);
             view.forward(request, response);
-            
-            
+
         } else if (action.equalsIgnoreCase("menu")) {
             access = RRHH;
             RequestDispatcher view = request.getRequestDispatcher(access);
             view.forward(request, response);
-            
-            
-        }else if (action.equals("add")){
+
+        } else if (action.equals("add")) {
             access = add;
             RequestDispatcher view = request.getRequestDispatcher(access);
             view.forward(request, response);
-            
-            
-        }else if (action.equals("create")){
-            
+
+        } else if (action.equals("create")) {
+
             CRUDEmpresas crudE = new CRUDEmpresas();
             crudE.create(request.getParameter("txtNameEmpres"));
             access = listar;
             RequestDispatcher view = request.getRequestDispatcher(access);
             view.forward(request, response);
-        
-        }else if (action.equals("informe")) {
+
+        } else if (action.equals("informe")) {
             String desde = request.getParameter("txtFechaDesde");
             String hasta = request.getParameter("txtFechaHasta");
             Empresa e = new Empresa();
             CRUDEmpresas crudE = new CRUDEmpresas();
             CRUDUsers crudU = new CRUDUsers();
             ArrayList<User> userList = new ArrayList<>();
-            
+
             try {
                 e = crudE.list(request.getParameter("idEmpresa"));
 
